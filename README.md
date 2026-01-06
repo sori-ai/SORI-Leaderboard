@@ -33,13 +33,13 @@ Quantitative evaluation results on standard datasets.
 | Model | Note F1 | Note+Vel F1 | Note+Off F1 | Note+Off+Vel F1 | Params | Delay |
 |:------|:-------:|:-----------:|:-----------:|:---------------:|:------:|:-----:|
 | **Sori-Offline_Iterative** | 98.41 | 80.16 | 80.67 | N/A | N/A | Offline |
+| Semi-CRF | 98.32 | 92.94 | 93.48 | N/A | N/A | Offline |
 | **Sori-Realtime4.8M_192ms** | 97.44 | 95.08 | 72.91 | 71.44 | 4.8M | 192ms |
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
 | **Sori-Realtime4.8M_125ms** | 96.80 | 94.84 | 72.29 | 71.10 | 4.8M | 125ms |
 | Bytedance | 96.80 | N/A | 84.70 | 83.30 | 20.2M | Offline |
 | **Sori-Realtime4.8M_192ms_SS** | 96.49 | 90.66 | 70.42 | 66.61 | 4.8M | 192ms |
 | Google | 96.01 | N/A | 83.94 | 82.75 | 54M | Offline |
-| Semi-CRF | 96.01 | N/A | 83.94 | 82.75 | N/A | Offline |
 | **Sori-Realtime4.8M_62ms** | 86.49 | 80.09 | 45.71 | 43.15 | 4.8M | 62ms |
 | Spotify-light | 70.90 | N/A | 10.50 | N/A | 16K | 300ms |
 

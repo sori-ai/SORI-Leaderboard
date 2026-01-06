@@ -332,22 +332,22 @@
       "tested_date": "2024-01-01",
       "metrics": {
         "note": {
-          "f1": 96.01,
+          "f1": 98.32,
           "precision": null,
           "recall": null
         },
         "note_with_velocity": {
-          "f1": null,
+          "f1": 92.94,
           "precision": null,
           "recall": null
         },
         "note_with_offsets": {
-          "f1": 83.94,
+          "f1": 93.48,
           "precision": null,
           "recall": null
         },
         "note_with_offsets_and_velocity": {
-          "f1": 82.75,
+          "f1": null,
           "precision": null,
           "recall": null
         }
