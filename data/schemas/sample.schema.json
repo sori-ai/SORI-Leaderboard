@@ -1,0 +1,241 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Audio Samples",
+  "description": "소리 데모용 오디오 샘플 메타데이터 스키마 v2",
+  "type": "object",
+  "required": ["samples_gt_midi", "samples_musicxml"],
+  "properties": {
+    "samples_gt_midi": {
+      "type": "array",
+      "description": "GT MIDI가 있는 샘플 (정확한 메트릭 계산 가능)",
+      "items": {
+        "$ref": "#/definitions/sample_gt_midi"
+      }
+    },
+    "samples_musicxml": {
+      "type": "array",
+      "description": "MusicXML만 있는 샘플 (alignment 기반 매칭률)",
+      "items": {
+        "$ref": "#/definitions/sample_musicxml"
+      }
+    }
+  },
+  "definitions": {
+    "sample_gt_midi": {
+      "type": "object",
+      "required": ["id", "title", "source_audio", "ground_truth_midi", "results"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "샘플 고유 ID (kebab-case)"
+        },
+        "title": {
+          "type": "string",
+          "description": "곡 제목"
+        },
+        "composer": {
+          "type": "string",
+          "description": "작곡가"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["beginner", "intermediate", "advanced"],
+          "description": "난이도"
+        },
+        "duration_sec": {
+          "type": "number",
+          "minimum": 0,
+          "description": "재생 시간 (초)"
+        },
+        "description": {
+          "type": "string"
+        },
+        "source_audio": {
+          "type": "string",
+          "description": "원본 오디오 파일 경로"
+        },
+        "ground_truth_midi": {
+          "type": "string",
+          "description": "정답 MIDI 파일 경로"
+        },
+        "results": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/result_gt_midi"
+          },
+          "description": "모델별 변환 결과"
+        },
+        "visualizations": {
+          "$ref": "#/definitions/visualizations"
+        }
+      }
+    },
+    "sample_musicxml": {
+      "type": "object",
+      "required": ["id", "title", "source_audio", "musicxml_path", "results"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "샘플 고유 ID (kebab-case)"
+        },
+        "title": {
+          "type": "string",
+          "description": "곡 제목"
+        },
+        "composer": {
+          "type": "string",
+          "description": "작곡가"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["beginner", "intermediate", "advanced"],
+          "description": "난이도"
+        },
+        "duration_sec": {
+          "type": "number",
+          "minimum": 0,
+          "description": "재생 시간 (초)"
+        },
+        "description": {
+          "type": "string"
+        },
+        "source_audio": {
+          "type": "string",
+          "description": "원본 오디오 파일 경로"
+        },
+        "musicxml_path": {
+          "type": "string",
+          "description": "MusicXML 파일 경로"
+        },
+        "results": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/result_musicxml"
+          },
+          "description": "모델별 변환 결과"
+        },
+        "visualizations": {
+          "$ref": "#/definitions/visualizations"
+        }
+      }
+    },
+    "result_gt_midi": {
+      "type": "object",
+      "required": ["midi_path"],
+      "properties": {
+        "midi_path": {
+          "type": "string",
+          "description": "변환된 MIDI 파일 경로"
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "note": {
+              "$ref": "#/definitions/metric_set"
+            },
+            "note_with_velocity": {
+              "$ref": "#/definitions/metric_set"
+            },
+            "note_with_offsets": {
+              "$ref": "#/definitions/metric_set"
+            },
+            "note_with_offsets_and_velocity": {
+              "$ref": "#/definitions/metric_set"
+            }
+          }
+        },
+        "notes": {
+          "type": "string",
+          "description": "특이사항"
+        }
+      }
+    },
+    "result_musicxml": {
+      "type": "object",
+      "required": ["midi_path"],
+      "properties": {
+        "midi_path": {
+          "type": "string",
+          "description": "변환된 MIDI 파일 경로"
+        },
+        "alignment_metrics": {
+          "type": "object",
+          "properties": {
+            "matched_notes": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "매칭된 노트 수"
+            },
+            "unmatched_notes": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "매칭되지 않은 노트 수"
+            },
+            "total_notes_predicted": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "예측된 총 노트 수"
+            },
+            "total_notes_reference": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "참조(MusicXML) 총 노트 수"
+            },
+            "match_ratio": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "매칭 비율 (%)"
+            }
+          }
+        },
+        "notes": {
+          "type": "string",
+          "description": "특이사항"
+        }
+      }
+    },
+    "metric_set": {
+      "type": "object",
+      "properties": {
+        "f1": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "F1 score (%)"
+        },
+        "precision": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Precision (%)"
+        },
+        "recall": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Recall (%)"
+        }
+      }
+    },
+    "visualizations": {
+      "type": "object",
+      "properties": {
+        "piano_roll_comparison": {
+          "type": "string",
+          "description": "피아노롤 비교 이미지 경로"
+        },
+        "spectrogram": {
+          "type": "string",
+          "description": "스펙트로그램 이미지 경로"
+        },
+        "waveform": {
+          "type": "string",
+          "description": "파형 이미지 경로"
+        }
+      }
+    }
+  }
+}

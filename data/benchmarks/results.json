@@ -1,0 +1,386 @@
+{
+  "last_updated": "2025-01-06",
+  "version": "2.8.0",
+  "models": [
+    {
+      "id": "sori-realtime-4.8m-62ms",
+      "name": "Sori-Realtime4.8M_62ms",
+      "is_ours": true,
+      "description": "Ultra-low latency real-time Audio-to-MIDI engine",
+      "params_million": 4.8,
+      "delay_ms": 62,
+      "internal_name": "ConvTrans_62",
+      "training_notes": "Ultra-low latency model"
+    },
+    {
+      "id": "sori-realtime-4.8m-125ms",
+      "name": "Sori-Realtime4.8M_125ms",
+      "is_ours": true,
+      "description": "Real-time Audio-to-MIDI engine",
+      "params_million": 4.8,
+      "delay_ms": 125,
+      "internal_name": "ConvTransEnc_MAE_d2048",
+      "training_notes": "MAE pretrained, d_model=2048"
+    },
+    {
+      "id": "sori-realtime-4.8m-192ms",
+      "name": "Sori-Realtime4.8M_192ms",
+      "is_ours": true,
+      "description": "Real-time Audio-to-MIDI engine",
+      "params_million": 4.8,
+      "delay_ms": 192,
+      "internal_name": "ConvTrans_MAEV3",
+      "training_notes": "MAE pretrained, MAESTRO v3"
+    },
+    {
+      "id": "sori-realtime-4.8m-192ms-ss",
+      "name": "Sori-Realtime4.8M_192ms_SS",
+      "is_ours": true,
+      "description": "Real-time Audio-to-MIDI engine with Source Separation",
+      "params_million": 4.8,
+      "delay_ms": 192,
+      "internal_name": "ConvTransEnc_MAE_key_narrow_aug",
+      "training_notes": "MAE pretrained, noise/instrument augmentation for source separation"
+    },
+    {
+      "id": "spotify-light",
+      "name": "Spotify-light",
+      "is_ours": false,
+      "description": "Spotify Basic Pitch lightweight version",
+      "params_million": 0.016,
+      "delay_ms": 300
+    },
+    {
+      "id": "par-taegyun-kwon-2024",
+      "name": "Taegyun Kwon (2024)",
+      "is_ours": false,
+      "description": "PAR (Proposed) - Piano Audio-to-MIDI with Refinement",
+      "params_million": 19.7,
+      "delay_ms": 320
+    },
+    {
+      "id": "sori-offline-iterative",
+      "name": "Sori-Offline_Iterative",
+      "is_ours": true,
+      "description": "Offline iterative Audio-to-MIDI engine",
+      "delay_ms": null,
+      "internal_name": "Offline_Iterative",
+      "training_notes": "Iterative refinement for high accuracy"
+    },
+    {
+      "id": "bytedance-regressing-onsets",
+      "name": "Bytedance",
+      "is_ours": false,
+      "description": "Regressing Onsets - Piano transcription model",
+      "params_million": 20.2,
+      "delay_ms": null
+    },
+    {
+      "id": "google-transformer",
+      "name": "Google",
+      "is_ours": false,
+      "description": "Transformer-based piano transcription model",
+      "params_million": 54,
+      "delay_ms": null
+    },
+    {
+      "id": "semi-crf",
+      "name": "Semi-CRF",
+      "is_ours": false,
+      "description": "Semi-CRF based piano transcription model",
+      "delay_ms": null
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "maestro-v3-test",
+      "name": "MAESTRO v3 Test Set",
+      "description": "클래식 피아노 공연 데이터셋 - 고정된 177곡 테스트셋",
+      "url": "https://magenta.tensorflow.org/datasets/maestro",
+      "num_tracks": 177,
+      "has_audio_samples": false
+    }
+  ],
+  "benchmark_results": [
+    {
+      "model_id": "sori-offline-iterative",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2025-01-06",
+      "metrics": {
+        "note": {
+          "f1": 98.41,
+          "precision": 99.47,
+          "recall": 97.40
+        },
+        "note_with_velocity": {
+          "f1": 80.16,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets": {
+          "f1": 80.67,
+          "precision": 81.51,
+          "recall": 79.86
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": null,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "notes": "Offline iterative model, velocity/offset evaluated separately"
+    },
+    {
+      "model_id": "sori-realtime-4.8m-192ms",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2025-01-06",
+      "metrics": {
+        "note": {
+          "f1": 97.444,
+          "precision": 99.364,
+          "recall": 95.658
+        },
+        "note_with_velocity": {
+          "f1": 95.084,
+          "precision": 96.935,
+          "recall": 93.362
+        },
+        "note_with_offsets": {
+          "f1": 72.907,
+          "precision": 74.179,
+          "recall": 71.719
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": 71.437,
+          "precision": 72.671,
+          "recall": 70.285
+        }
+      },
+      "notes": "ConvTrans_MAEV3 model, evaluated on 177 test tracks"
+    },
+    {
+      "model_id": "sori-realtime-4.8m-192ms-ss",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2025-01-06",
+      "metrics": {
+        "note": {
+          "f1": 96.490,
+          "precision": 99.109,
+          "recall": 94.092
+        },
+        "note_with_velocity": {
+          "f1": 90.657,
+          "precision": 93.085,
+          "recall": 88.430
+        },
+        "note_with_offsets": {
+          "f1": 70.421,
+          "precision": 72.167,
+          "recall": 68.814
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": 66.614,
+          "precision": 68.247,
+          "recall": 65.109
+        }
+      },
+      "notes": "Source Separation model with noise/instrument augmentation"
+    },
+    {
+      "model_id": "sori-realtime-4.8m-62ms",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2025-01-06",
+      "metrics": {
+        "note": {
+          "f1": 86.492,
+          "precision": 97.767,
+          "recall": 78.468
+        },
+        "note_with_velocity": {
+          "f1": 80.095,
+          "precision": 90.370,
+          "recall": 72.763
+        },
+        "note_with_offsets": {
+          "f1": 45.707,
+          "precision": 50.974,
+          "recall": 41.874
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": 43.150,
+          "precision": 48.055,
+          "recall": 39.573
+        }
+      },
+      "notes": "Ultra-low latency 62ms model"
+    },
+    {
+      "model_id": "sori-realtime-4.8m-125ms",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2025-01-05",
+      "metrics": {
+        "note": {
+          "f1": 96.804,
+          "precision": 99.187,
+          "recall": 94.617
+        },
+        "note_with_velocity": {
+          "f1": 94.837,
+          "precision": 97.145,
+          "recall": 92.718
+        },
+        "note_with_offsets": {
+          "f1": 72.291,
+          "precision": 73.888,
+          "recall": 70.819
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": 71.104,
+          "precision": 72.660,
+          "recall": 69.670
+        }
+      },
+      "notes": "MAE pretrained model, evaluated on 177 test tracks"
+    },
+    {
+      "model_id": "bytedance-regressing-onsets",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2024-01-01",
+      "metrics": {
+        "note": {
+          "f1": 96.8,
+          "precision": 95.6,
+          "recall": 98.1
+        },
+        "note_with_velocity": {
+          "f1": null,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets": {
+          "f1": 84.7,
+          "precision": 83.7,
+          "recall": 85.8
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": 83.3,
+          "precision": 82.2,
+          "recall": 84.3
+        }
+      },
+      "notes": "Regressing Onsets [7] from published paper"
+    },
+    {
+      "model_id": "par-taegyun-kwon-2024",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2024-01-01",
+      "metrics": {
+        "note": {
+          "f1": 97.0,
+          "precision": 95.6,
+          "recall": 98.5
+        },
+        "note_with_velocity": {
+          "f1": null,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets": {
+          "f1": 87.9,
+          "precision": 86.7,
+          "recall": 89.2
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": 86.8,
+          "precision": 85.5,
+          "recall": 88.1
+        }
+      },
+      "notes": "PAR (Proposed) from Taegyun Kwon 2024 paper"
+    },
+    {
+      "model_id": "google-transformer",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2024-01-01",
+      "metrics": {
+        "note": {
+          "f1": 96.01,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_velocity": {
+          "f1": null,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets": {
+          "f1": 83.94,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": 82.75,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "notes": "Google Transformer model from published paper"
+    },
+    {
+      "model_id": "semi-crf",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2024-01-01",
+      "metrics": {
+        "note": {
+          "f1": 96.01,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_velocity": {
+          "f1": null,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets": {
+          "f1": 83.94,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": 82.75,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "notes": "Semi-CRF model from published paper"
+    },
+    {
+      "model_id": "spotify-light",
+      "benchmark_id": "maestro-v3-test",
+      "tested_date": "2024-01-01",
+      "metrics": {
+        "note": {
+          "f1": 70.9,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_velocity": {
+          "f1": null,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets": {
+          "f1": 10.5,
+          "precision": null,
+          "recall": null
+        },
+        "note_with_offsets_and_velocity": {
+          "f1": null,
+          "precision": null,
+          "recall": null
+        }
+      },
+      "notes": "Spotify Basic Pitch lightweight version"
+    }
+  ]
+}

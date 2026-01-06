@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Benchmark Results",
+  "description": "소리 Audio-to-MIDI 벤치마크 결과 스키마 v2",
+  "type": "object",
+  "required": ["last_updated", "version", "models", "benchmarks", "benchmark_results"],
+  "properties": {
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "마지막 업데이트 날짜 (YYYY-MM-DD)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "데이터 버전 (Semantic Versioning)"
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/model"
+      },
+      "minItems": 1
+    },
+    "benchmarks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/benchmark"
+      },
+      "minItems": 1
+    },
+    "benchmark_results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/benchmark_result"
+      }
+    }
+  },
+  "definitions": {
+    "model": {
+      "type": "object",
+      "required": ["id", "name", "is_ours"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-.]+$",
+          "description": "모델 고유 ID (kebab-case)"
+        },
+        "name": {
+          "type": "string",
+          "description": "표시용 모델 이름"
+        },
+        "is_ours": {
+          "type": "boolean",
+          "description": "소리 자체 개발 여부"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "params_million": {
+          "type": "number",
+          "minimum": 0,
+          "description": "파라미터 수 (백만 단위)"
+        },
+        "delay_ms": {
+          "type": "number",
+          "minimum": 0,
+          "description": "지연 시간 (ms)"
+        },
+        "internal_name": {
+          "type": "string",
+          "description": "내부 모델명"
+        },
+        "training_notes": {
+          "type": "string",
+          "description": "학습 관련 메모"
+        }
+      }
+    },
+    "benchmark": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "num_tracks": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "테스트 트랙 수"
+        },
+        "has_audio_samples": {
+          "type": "boolean",
+          "description": "오디오 샘플 포함 여부"
+        }
+      }
+    },
+    "benchmark_result": {
+      "type": "object",
+      "required": ["model_id", "benchmark_id", "metrics", "tested_date"],
+      "properties": {
+        "model_id": {
+          "type": "string"
+        },
+        "benchmark_id": {
+          "type": "string"
+        },
+        "metrics": {
+          "$ref": "#/definitions/metrics"
+        },
+        "tested_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["note"],
+      "properties": {
+        "note": {
+          "$ref": "#/definitions/metric_set",
+          "description": "Note detection (onset only, ±50ms tolerance)"
+        },
+        "note_with_velocity": {
+          "$ref": "#/definitions/metric_set",
+          "description": "Note + velocity matching"
+        },
+        "note_with_offsets": {
+          "$ref": "#/definitions/metric_set",
+          "description": "Note + offset matching"
+        },
+        "note_with_offsets_and_velocity": {
+          "$ref": "#/definitions/metric_set",
+          "description": "Note + offset + velocity matching"
+        }
+      }
+    },
+    "metric_set": {
+      "type": "object",
+      "required": ["f1", "precision", "recall"],
+      "properties": {
+        "f1": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "F1 score (%)"
+        },
+        "precision": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Precision (%)"
+        },
+        "recall": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Recall (%)"
+        }
+      }
+    }
+  }
+}

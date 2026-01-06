@@ -1,0 +1,50 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+.env.*
+*.egg-info/
+dist/
+build/
+
+# Internal/Development files
+.claude/
+CLAUDE.md
+infer_results/
+
+# Large asset files (MIDI results)
+assets/midi/
+
+# Keep placeholder
+!assets/midi/.gitkeep
+
+# Internal evaluation data
+assets/overall_metrics.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
