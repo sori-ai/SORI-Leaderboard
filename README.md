@@ -39,6 +39,7 @@ Quantitative evaluation results on standard datasets.
 | **Sori-Realtime4.8M_104ms** | 96.99 | 92.72 | 86.17 | 82.58 | 4.8M | 104ms |
 | Bytedance | 96.80 | N/A | 84.70 | 83.30 | 20.2M | Offline |
 | **Sori-Realtime4.8M_192ms_SS** | 96.49 | 90.66 | 70.42 | 66.61 | 4.8M | 192ms |
+| Yamaha Mobile-AMT | 96.30 | N/A | 76.80 | 75.53 | 5.9M | 10s |
 | Google | 96.01 | N/A | 83.94 | 82.75 | 54M | Offline |
 | **Sori-Realtime4.8M_62ms** | 86.49 | 80.09 | 45.71 | 43.15 | 4.8M | 62ms |
 | Spotify-light | 70.90 | N/A | 10.50 | N/A | 16K | 300ms |
