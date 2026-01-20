@@ -37,7 +37,6 @@ Quantitative evaluation results on standard datasets.
 | **Sori-Realtime4.8M_192ms** | 97.44 | 95.08 | 72.91 | 71.44 | 4.8M | 192ms |
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
 | **Sori-Realtime4.8M_104ms** | 96.99 | 92.72 | 86.17 | 82.58 | 4.8M | 104ms |
-| **Sori-Realtime4.8M_125ms** | 96.80 | 94.84 | 72.29 | 71.10 | 4.8M | 125ms |
 | Bytedance | 96.80 | N/A | 84.70 | 83.30 | 20.2M | Offline |
 | **Sori-Realtime4.8M_192ms_SS** | 96.49 | 90.66 | 70.42 | 66.61 | 4.8M | 192ms |
 | Google | 96.01 | N/A | 83.94 | 82.75 | 54M | Offline |
@@ -64,15 +63,6 @@ Quantitative evaluation results on standard datasets.
 | Note + Velocity | 95.08 | 96.94 | 93.36 |
 | Note + Offsets | 72.91 | 74.18 | 71.72 |
 | Note + Offsets + Velocity | 71.44 | 72.67 | 70.28 |
-
-#### Sori-Realtime4.8M_125ms
-
-| Metric | F1 | Precision | Recall |
-|:-------|:--:|:---------:|:------:|
-| Note (onset only) | 96.80 | 99.19 | 94.62 |
-| Note + Velocity | 94.84 | 97.14 | 92.72 |
-| Note + Offsets | 72.29 | 73.89 | 70.82 |
-| Note + Offsets + Velocity | 71.10 | 72.66 | 69.67 |
 
 #### Sori-Realtime4.8M_104ms
 
@@ -125,7 +115,6 @@ Quantitative evaluation results on standard datasets.
 | **Sori-Offline_Iterative** | N/A | Offline | Highest accuracy with iterative refinement |
 | **Sori-Realtime4.8M_192ms** | 4.8M | 192ms | Best real-time performance |
 | **Sori-Realtime4.8M_192ms_SS** | 4.8M | 192ms | Source separation for noisy environments |
-| **Sori-Realtime4.8M_125ms** | 4.8M | 125ms | Balanced latency and accuracy |
 | **Sori-Realtime4.8M_104ms** | 4.8M | 104ms | Low latency with improved offset accuracy |
 | **Sori-Realtime4.8M_62ms** | 4.8M | 62ms | Ultra-low latency for live performance |
 
