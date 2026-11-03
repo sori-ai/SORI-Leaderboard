@@ -21,22 +21,6 @@
 
 Quantitative evaluation results on standard datasets.
 
-### Sori-Ensemble: T2 + sustain test results
-
-Full MAESTRO v3 test set (177 complete recordings), per-recording macro F1 (%).
-Sori-Ensemble combines SORI Current with TransKun 2.0.1, with weak onset-peak
-bonus and the segment-boundary seam fix. The T2 protocol removes 2,404 audited
-erroneous notes **before** sustain-pedal extension.
-
-| System | Note | Note + velocity | Note + offset | Note + offset + velocity |
-|:-------|-----:|----------------:|--------------:|-------------------------:|
-| **Sori-Ensemble** | **98.71075** | **98.04305** | **93.68190** | **93.09061** |
-
-The seam fix was motivated by examples from the test set; this is not an
-independent final test of that rule. The historical results below use protocols
-whose reference processing and aggregation are not fully documented, so direct
-comparison is not established. See [evaluation details](docs/recent-offline-evaluation.md).
-
 The real-time results below are historical.
 
 <!-- BENCHMARK_TABLE_START -->
@@ -44,6 +28,7 @@ The real-time results below are historical.
 
 | Model | Note F1 | Note+Vel F1 | Note+Off F1 | Note+Off+Vel F1 | Params | Delay |
 |:------|:-------:|:-----------:|:-----------:|:---------------:|:------:|:-----:|
+| **Sori-Ensemble**¹ | **98.71** | **98.04** | **93.68** | **93.09** | N/A | Offline |
 | Semi-CRF | 98.32 | 92.94 | 93.48 | N/A | N/A | Offline |
 | **Sori-Realtime4.8M_192ms** | 97.44 | 95.08 | 72.91 | 71.44 | 4.8M | 192ms |
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
@@ -54,6 +39,11 @@ The real-time results below are historical.
 | Google | 96.01 | N/A | 83.94 | 82.75 | 54M | Offline |
 | **Sori-Realtime4.8M_62ms** | 86.49 | 80.09 | 45.71 | 43.15 | 4.8M | 62ms |
 | Spotify-light | 70.90 | N/A | 10.50 | N/A | 16K | 300ms |
+
+¹ Sori-Ensemble uses T2-cleaned references with sustain extension, averaged
+per recording. The seam fix was motivated by test examples. Historical rows
+have incompletely documented reference processing and aggregation, so direct
+comparison is not established. [Evaluation details](docs/recent-offline-evaluation.md).
 
 <details>
 <summary>View Detailed Metrics</summary>
