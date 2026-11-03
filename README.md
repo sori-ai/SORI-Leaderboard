@@ -40,7 +40,9 @@ Current with Stock TransKun predictions; it is an offline two-model system.
 T2 removes 2,404 audited notes from the original reference MIDI, not from the
 predictions. See [evaluation details](docs/recent-offline-evaluation.md) for
 protocol and limitations. Offset and velocity scores are not reported for this
-evaluation.
+evaluation. Recent decoder experiments improve Current-only onset F1; see the
+[decoder results and limitations](docs/recent-offline-evaluation.md#decoder-experiments-october-2026).
+Their effect on the full UNION has not been established.
 
 The real-time results below are historical. Newer real-time experiments found
 so far use different evaluation coverage and are not added to this table.
