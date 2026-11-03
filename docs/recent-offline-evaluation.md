@@ -86,3 +86,28 @@ above (98.57212%); these are separate evaluation runs. Weak peak improves the
 sustain-extended offset scores but slightly lowers onset and velocity scores.
 The reference processing for historical leaderboard rows is not fully known,
 so direct comparison of the offset and velocity values is not established.
+
+## T2 with sustain extension
+
+The full 177-recording test was rescored with a reference constructed by first
+removing the 2,404 T2-excluded notes from the source MIDI, then extending the
+remaining notes using CC64 sustain events. Every excluded note was matched
+uniquely to an original MIDI note using pitch, onset and velocity. Across all
+177 tracks, the retained note count, onset, pitch and velocity were checked
+against the T2 key-release reference before scoring. This order prevents an
+excluded note from truncating a retained note during pedal extension.
+
+| System | Note | Note + velocity | Note + offset | Note + offset + velocity |
+|:-------|-----:|----------------:|--------------:|-------------------------:|
+| Sori-Ensemble | 98.69952 | 98.04167 | 93.60831 | 93.03024 |
+| Sori-Ensemble + weak onset-peak bonus | 98.69195 | 98.02446 | 93.63808 | 93.04689 |
+
+Values are percent, per-recording macro F1. Matching uses the onset, offset,
+and velocity tolerances described above. Both rows use saved Current and Stock
+predictions combined in memory; neither includes the seam fix. The bonus raises
+offset F1 by 0.02977 percentage points while reducing onset F1 by 0.00757
+points. Test recordings have been used in previous research and are not an
+untouched test. The historical table's reference processing is not sufficiently
+specified for direct offset or velocity comparison.
+
+Machine-readable results: [T2 sustain evaluation](../data/benchmarks/t2-sustain-results.json).

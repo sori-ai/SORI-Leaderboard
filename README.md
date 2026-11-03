@@ -45,6 +45,20 @@ evaluation. Recent decoder experiments improve Current-only onset F1; see the
 The weak peak bonus was also evaluated with the ensemble below; the seam fix
 has not yet been evaluated with it.
 
+### Sori-Ensemble: T2 + sustain test results
+
+Full MAESTRO v3 test set (177 complete recordings), per-recording macro F1 (%).
+The T2 protocol removes 2,404 audited erroneous notes **before** sustain-pedal
+extension. Velocity uses the `mir_eval` per-recording affine fit and 0.1
+normalized tolerance. These are experimental offline results.
+
+| System | Note | Note + velocity | Note + offset | Note + offset + velocity |
+|:-------|-----:|----------------:|--------------:|-------------------------:|
+| **Sori-Ensemble** | **98.69952** | **98.04167** | 93.60831 | 93.03024 |
+| Sori-Ensemble + weak onset-peak bonus | 98.69195 | 98.02446 | **93.63808** | **93.04689** |
+
+The seam fix is not included. See [evaluation details](docs/recent-offline-evaluation.md#t2-with-sustain-extension) for the reference construction and limits.
+
 ### Sori-Ensemble: full-test note attributes
 
 Full MAESTRO v3 test set, macro F1 (%) over 177 full recordings. These rows

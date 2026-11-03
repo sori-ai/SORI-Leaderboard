@@ -1,0 +1,27 @@
+{
+  "benchmark": "MAESTRO v3 test, 177 complete recordings",
+  "tested_date": "2026-11-03",
+  "reference": "T2: exclude 2404 audited notes before CC64 sustain extension",
+  "aggregation": "mean per-recording F1",
+  "onset_tolerance_seconds": 0.05,
+  "offset_tolerance": "max(0.05 s, 20% of reference duration)",
+  "velocity": "mir_eval per-recording affine fit, normalized tolerance 0.1",
+  "unit": "percent",
+  "results": [
+    {
+      "system": "Sori-Ensemble",
+      "note_f1": 98.69951746408242,
+      "note_velocity_f1": 98.04167491668986,
+      "note_offset_f1": 93.60831109510248,
+      "note_offset_velocity_f1": 93.03024166149011
+    },
+    {
+      "system": "Sori-Ensemble + weak onset-peak bonus",
+      "note_f1": 98.69195006894746,
+      "note_velocity_f1": 98.0244643899653,
+      "note_offset_f1": 93.63807615252185,
+      "note_offset_velocity_f1": 93.04689282561388
+    }
+  ],
+  "limitations": "Saved predictions combined in memory; seam fix not included; test set previously used in research."
+}
