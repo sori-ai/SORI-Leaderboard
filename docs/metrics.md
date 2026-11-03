@@ -6,7 +6,7 @@
 
 | 메트릭 | 설명 | 범위 | 높을수록 좋음? |
 |--------|------|------|---------------|
-| `note_f1` | 노트 검출 F1 스코어 (onset only) | 0-100 (%) | O |
+| `note_f1` | 노트 검출 F1 스코어 | 0-1 | O |
 | `note_precision` | 노트 정밀도 | 0-1 | O |
 | `note_recall` | 노트 재현율 | 0-1 | O |
 | `onset_f1` | 노트 시작점 F1 | 0-1 | O |
@@ -18,7 +18,7 @@
 
 ## Note F1 Score
 
-README의 **Note F1은 onset-only 지표**입니다. Note+Off, Note+Vel, Note+Off+Vel은 별도 열입니다. 데이터 JSON과 README는 백분율(0–100)을 사용합니다.
+**가장 중요한 지표**로, 전체적인 노트 검출 성능을 나타냅니다.
 
 ### 정의
 
@@ -32,7 +32,7 @@ F1 = 2 * (Precision * Recall) / (Precision + Recall)
 
 1. **Pitch**: 정확히 일치
 2. **Onset**: Ground Truth 대비 ±50ms 이내
-Note F1은 offset을 요구하지 않습니다. Note+Off F1에만 `max(GT duration × 0.2, 50ms)`의 offset 허용오차를 추가합니다.
+3. **Offset**: Ground Truth 대비 20% 또는 50ms 중 큰 값 이내
 
 ### 해석
 

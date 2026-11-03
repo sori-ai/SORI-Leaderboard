@@ -27,8 +27,6 @@ def generate_benchmark_table(results_data: dict) -> str:
     # 벤치마크별로 결과 그룹화
     results_by_benchmark = {}
     for result in results_data["benchmark_results"]:
-        if not models[result["model_id"]].get("show_on_leaderboard", True):
-            continue
         bm_id = result["benchmark_id"]
         if bm_id not in results_by_benchmark:
             results_by_benchmark[bm_id] = []
@@ -88,9 +86,7 @@ def generate_benchmark_table(results_data: dict) -> str:
                     params = f"{params_val}M"
             else:
                 params = "N/A"
-            delay_ms = model.get("delay_ms")
-            delay = ((f"{delay_ms / 1000:g}s" if delay_ms >= 1000 else f"{delay_ms}ms") if delay_ms is not None else
-                     "Not measured" if model.get("execution_mode") == "streaming" else "Offline")
+            delay = f"{model.get('delay_ms')}ms" if model.get('delay_ms') else "Offline"
 
             row = [name, note_f1, note_vel_f1, note_off_f1, note_off_vel_f1, params, delay]
             output_lines.append("| " + " | ".join(row) + " |")
@@ -116,9 +112,6 @@ def generate_benchmark_table(results_data: dict) -> str:
             output_lines.append(f"| Note + Offsets | {fmt_metric(metrics['note_with_offsets']['f1'])} | {fmt_metric(metrics['note_with_offsets']['precision'])} | {fmt_metric(metrics['note_with_offsets']['recall'])} |")
             output_lines.append(f"| Note + Offsets + Velocity | {fmt_metric(metrics['note_with_offsets_and_velocity']['f1'])} | {fmt_metric(metrics['note_with_offsets_and_velocity']['precision'])} | {fmt_metric(metrics['note_with_offsets_and_velocity']['recall'])} |")
             output_lines.append("")
-            if result.get("evaluation_report"):
-                output_lines.append(f"[Evaluation protocol and provenance]({result['evaluation_report']})")
-                output_lines.append("")
 
         output_lines.append("</details>")
         output_lines.append("")

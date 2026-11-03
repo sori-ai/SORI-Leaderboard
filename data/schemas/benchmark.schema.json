@@ -3,13 +3,7 @@
   "title": "Benchmark Results",
   "description": "소리 Audio-to-MIDI 벤치마크 결과 스키마 v2",
   "type": "object",
-  "required": [
-    "last_updated",
-    "version",
-    "models",
-    "benchmarks",
-    "benchmark_results"
-  ],
+  "required": ["last_updated", "version", "models", "benchmarks", "benchmark_results"],
   "properties": {
     "last_updated": {
       "type": "string",
@@ -45,11 +39,7 @@
   "definitions": {
     "model": {
       "type": "object",
-      "required": [
-        "id",
-        "name",
-        "is_ours"
-      ],
+      "required": ["id", "name", "is_ours"],
       "properties": {
         "id": {
           "type": "string",
@@ -72,18 +62,12 @@
           "format": "uri"
         },
         "params_million": {
-          "type": [
-            "number",
-            "null"
-          ],
+          "type": "number",
           "minimum": 0,
           "description": "파라미터 수 (백만 단위)"
         },
         "delay_ms": {
-          "type": [
-            "number",
-            "null"
-          ],
+          "type": "number",
           "minimum": 0,
           "description": "지연 시간 (ms)"
         },
@@ -94,25 +78,12 @@
         "training_notes": {
           "type": "string",
           "description": "학습 관련 메모"
-        },
-        "show_on_leaderboard": {
-          "type": "boolean",
-          "default": true
-        },
-        "execution_mode": {
-          "enum": [
-            "streaming",
-            "offline"
-          ]
         }
       }
     },
     "benchmark": {
       "type": "object",
-      "required": [
-        "id",
-        "name"
-      ],
+      "required": ["id", "name"],
       "properties": {
         "id": {
           "type": "string",
@@ -141,12 +112,7 @@
     },
     "benchmark_result": {
       "type": "object",
-      "required": [
-        "model_id",
-        "benchmark_id",
-        "metrics",
-        "tested_date"
-      ],
+      "required": ["model_id", "benchmark_id", "metrics", "tested_date"],
       "properties": {
         "model_id": {
           "type": "string"
@@ -158,10 +124,7 @@
           "$ref": "#/definitions/metrics"
         },
         "tested_date": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": "string",
           "format": "date"
         },
         "notes": {
@@ -171,9 +134,7 @@
     },
     "metrics": {
       "type": "object",
-      "required": [
-        "note"
-      ],
+      "required": ["note"],
       "properties": {
         "note": {
           "$ref": "#/definitions/metric_set",
@@ -195,35 +156,22 @@
     },
     "metric_set": {
       "type": "object",
-      "required": [
-        "f1",
-        "precision",
-        "recall"
-      ],
+      "required": ["f1", "precision", "recall"],
       "properties": {
         "f1": {
-          "type": [
-            "number",
-            "null"
-          ],
+          "type": "number",
           "minimum": 0,
           "maximum": 100,
           "description": "F1 score (%)"
         },
         "precision": {
-          "type": [
-            "number",
-            "null"
-          ],
+          "type": "number",
           "minimum": 0,
           "maximum": 100,
           "description": "Precision (%)"
         },
         "recall": {
-          "type": [
-            "number",
-            "null"
-          ],
+          "type": "number",
           "minimum": 0,
           "maximum": 100,
           "description": "Recall (%)"

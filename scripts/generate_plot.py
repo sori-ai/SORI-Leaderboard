@@ -30,10 +30,6 @@ def main():
     for result in data["benchmark_results"]:
         model_id = result["model_id"]
         model = models[model_id]
-        if not model.get("show_on_leaderboard", True):
-            continue
-        if model.get("execution_mode") == "streaming" and model.get("delay_ms") is None:
-            continue  # Unknown streaming latency is not offline latency.
         note_f1 = result["metrics"]["note"]["f1"]
         delay_ms = model.get("delay_ms")
         is_ours = model.get("is_ours", False)
@@ -42,10 +38,7 @@ def main():
         if note_f1 is None:
             continue
 
-        if delay_ms is not None and delay_ms > 350:
-            name = f"{name} ({delay_ms / 1000:g}s)"
-            delay_ms = None  # Label separately in the off-scale region.
-        if delay_ms is None:  # Offline or explicitly labeled off-scale
+        if delay_ms is None:  # Offline
             if is_ours:
                 sori_offline.append((note_f1, name))
             else:
@@ -139,7 +132,6 @@ def main():
             'Bytedance': (0, 14),
             'Google': (-30, -20),
             'Semi-CRF': (30, -20),
-            'Yamaha Mobile-AMT (10s)': (10, -50),
         }
         for i, (f, n) in enumerate(zip(f1s, names)):
             x_offset = offline_x + (i % 3 - 1) * 15
@@ -173,7 +165,7 @@ def main():
     # Offline region line
     ax_top.axvline(x=350, color='#e5e7eb', linestyle='--', linewidth=2, zorder=1)
     ax_bottom.axvline(x=350, color='#e5e7eb', linestyle='--', linewidth=2, zorder=1)
-    ax_top.text(405, 85.5, 'Offline / off-scale', ha='center', fontsize=13, color='#9ca3af', style='italic')
+    ax_top.text(405, 85.5, 'Offline', ha='center', fontsize=13, color='#9ca3af', style='italic')
 
     # Axis settings
     ax_bottom.set_xlabel('Delay (ms)', fontsize=14, fontweight='bold')

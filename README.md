@@ -21,15 +21,11 @@
 
 Quantitative evaluation results on standard datasets.
 
-**2026-11-03 update:** Added the current shared-integration research reference on all 177 MAESTRO v3 test tracks. This is not a product-release announcement. [Evaluation details](docs/evaluations/shared-integration-35k.md).
-
 ### Note F1 vs Latency Trade-off
 
 <p align="center">
   <img src="assets/images/note_f1_vs_delay.png" alt="Note F1 vs Delay" width="800"/>
 </p>
-
-Models with unmeasured end-to-end latency remain in the table but are omitted from the latency plot. Historical results retain their reported protocols.
 
 <!-- BENCHMARK_TABLE_START -->
 ### MAESTRO v3 Test Set (177 tracks)
@@ -88,7 +84,7 @@ Models with unmeasured end-to-end latency remain in the table but are omitted fr
 | Note + Offsets | 85.53 | N/A | N/A |
 | Note + Offsets + Velocity | 76.97 | N/A | N/A |
 
-[Evaluation protocol and provenance](docs/evaluations/shared-integration-35k.md)
+Current research reference, not a product release. Full-path latency is unmeasured, so this model is not plotted. [Evaluation details](docs/evaluations/shared-integration-35k.md).
 
 #### Sori-Realtime4.8M_192ms_SS
 
@@ -130,7 +126,6 @@ Models with unmeasured end-to-end latency remain in the table but are omitted fr
 | Model | Parameters | Delay | Features |
 |:------|:----------:|:-----:|:---------|
 | **Sori-Offline_Iterative** | N/A | Offline | Highest accuracy with iterative refinement |
-| **Sori-Shared-Integration-35k** | Not verified | Not measured | Current shared-integration research reference; not deployed |
 | **Sori-Realtime4.8M_192ms** | 4.8M | 192ms | Best real-time performance |
 | **Sori-Realtime4.8M_192ms_SS** | 4.8M | 192ms | Source separation for noisy environments |
 | **Sori-Realtime4.8M_104ms** | 4.8M | 104ms | Low latency with improved offset accuracy |
@@ -156,7 +151,7 @@ For inquiries, please contact:
 ---
 
 <!-- LAST_UPDATED_START -->
-*Last updated: 2026-11-03 | Data version: v2.10.0*
+*Last updated: 2026-01-20 | Data version: v2.9.0*
 <!-- LAST_UPDATED_END -->
 
 <p align="center">

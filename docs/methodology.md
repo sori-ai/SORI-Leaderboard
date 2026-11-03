@@ -39,8 +39,7 @@ Audio-to-MIDI (Automatic Music Transcription) 시스템의 성능을 공정하�
 
 | 메트릭 | 설명 | Tolerance |
 |--------|------|-----------|
-| Note F1 | Pitch + onset-only F1 | onset ±50ms; offset 미사용 |
-| Note+Off F1 | Pitch + onset + offset F1 | onset ±50ms, offset max(20%, 50ms) |
+| Note F1 | Precision과 Recall의 조화 평균 | onset ±50ms, offset 20% or 50ms |
 | Note Precision | 예측 노트 중 정확한 비율 | 동일 |
 | Note Recall | 실제 노트 중 검출된 비율 | 동일 |
 
@@ -106,7 +105,3 @@ Audio-to-MIDI (Automatic Music Transcription) 시스템의 성능을 공정하�
 
 모든 실험 코드와 설정은 요청 시 공개 가능합니다.
 문의: tech@sori.ai
-
-## 결과별 재현 정보
-
-이 저장소에는 모델 추론이나 채점 실행기가 포함되어 있지 않습니다. 위 환경은 기존 기록이며 모든 후속 결과의 실행 환경을 뜻하지 않습니다. 새 결과는 고정 checkpoint, 데이터 분모, 집계, 채점 설정과 원결과 해시를 결과별 보고서에 기록합니다. 과거 행의 미기록 설정을 새 결과와 동일하다고 가정하지 않습니다. `tested_date: null`은 평가 날짜가 원자료에 없다는 뜻이며 게시 날짜로 대체하지 않습니다.

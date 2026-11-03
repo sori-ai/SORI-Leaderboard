@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-03",
-  "version": "2.10.0",
+  "last_updated": "2025-01-06",
+  "version": "2.8.0",
   "models": [
     {
       "id": "sori-realtime-4.8m-62ms",
@@ -20,8 +20,7 @@
       "params_million": 4.8,
       "delay_ms": 125,
       "internal_name": "ConvTransEnc_MAE_d2048",
-      "training_notes": "MAE pretrained, d_model=2048",
-      "show_on_leaderboard": false
+      "training_notes": "MAE pretrained, d_model=2048"
     },
     {
       "id": "sori-realtime-4.8m-192ms",
@@ -90,29 +89,6 @@
       "is_ours": false,
       "description": "Semi-CRF based piano transcription model",
       "delay_ms": null
-    },
-    {
-      "id": "sori-realtime-4.8m-104ms",
-      "name": "Sori-Realtime4.8M_104ms",
-      "is_ours": true,
-      "params_million": 4.8,
-      "delay_ms": 104
-    },
-    {
-      "id": "yamaha-mobile-amt",
-      "name": "Yamaha Mobile-AMT",
-      "is_ours": false,
-      "params_million": 5.9,
-      "delay_ms": 10000
-    },
-    {
-      "id": "sori-shared-integration-35k",
-      "name": "Sori-Shared-Integration-35k",
-      "is_ours": true,
-      "description": "Current shared-integration research reference; not a deployed product.",
-      "execution_mode": "streaming",
-      "params_million": null,
-      "delay_ms": null
     }
   ],
   "benchmarks": [
@@ -134,7 +110,7 @@
         "note": {
           "f1": 98.41,
           "precision": 99.47,
-          "recall": 97.4
+          "recall": 97.40
         },
         "note_with_velocity": {
           "f1": 80.16,
@@ -188,14 +164,14 @@
       "tested_date": "2025-01-06",
       "metrics": {
         "note": {
-          "f1": 96.49,
+          "f1": 96.490,
           "precision": 99.109,
           "recall": 94.092
         },
         "note_with_velocity": {
           "f1": 90.657,
           "precision": 93.085,
-          "recall": 88.43
+          "recall": 88.430
         },
         "note_with_offsets": {
           "f1": 70.421,
@@ -222,7 +198,7 @@
         },
         "note_with_velocity": {
           "f1": 80.095,
-          "precision": 90.37,
+          "precision": 90.370,
           "recall": 72.763
         },
         "note_with_offsets": {
@@ -231,7 +207,7 @@
           "recall": 41.874
         },
         "note_with_offsets_and_velocity": {
-          "f1": 43.15,
+          "f1": 43.150,
           "precision": 48.055,
           "recall": 39.573
         }
@@ -260,8 +236,8 @@
         },
         "note_with_offsets_and_velocity": {
           "f1": 71.104,
-          "precision": 72.66,
-          "recall": 69.67
+          "precision": 72.660,
+          "recall": 69.670
         }
       },
       "notes": "MAE pretrained model, evaluated on 177 test tracks"
@@ -405,91 +381,6 @@
         }
       },
       "notes": "Spotify Basic Pitch lightweight version"
-    },
-    {
-      "model_id": "sori-realtime-4.8m-104ms",
-      "benchmark_id": "maestro-v3-test",
-      "tested_date": null,
-      "metrics": {
-        "note": {
-          "f1": 96.99,
-          "precision": 98.81,
-          "recall": 95.28
-        },
-        "note_with_velocity": {
-          "f1": 92.72,
-          "precision": 94.46,
-          "recall": 91.1
-        },
-        "note_with_offsets": {
-          "f1": 86.17,
-          "precision": 87.77,
-          "recall": 84.68
-        },
-        "note_with_offsets_and_velocity": {
-          "f1": 82.58,
-          "precision": 84.1,
-          "recall": 81.15
-        }
-      },
-      "notes": "Preserved from the published README at commit 92cc721. Original evaluation date is not recorded; no new evaluation."
-    },
-    {
-      "model_id": "yamaha-mobile-amt",
-      "benchmark_id": "maestro-v3-test",
-      "tested_date": null,
-      "metrics": {
-        "note": {
-          "f1": 96.3,
-          "precision": null,
-          "recall": null
-        },
-        "note_with_velocity": {
-          "f1": null,
-          "precision": null,
-          "recall": null
-        },
-        "note_with_offsets": {
-          "f1": 76.8,
-          "precision": null,
-          "recall": null
-        },
-        "note_with_offsets_and_velocity": {
-          "f1": 75.53,
-          "precision": null,
-          "recall": null
-        }
-      },
-      "notes": "Preserved from the published README at commit 92cc721. Original evaluation date is not recorded; no new evaluation."
-    },
-    {
-      "model_id": "sori-shared-integration-35k",
-      "benchmark_id": "maestro-v3-test",
-      "tested_date": "2026-10-24",
-      "metrics": {
-        "note": {
-          "f1": 96.81666102848561,
-          "precision": 98.46813373481518,
-          "recall": 95.27553938649109
-        },
-        "note_with_velocity": {
-          "f1": 87.02173440036854,
-          "precision": null,
-          "recall": null
-        },
-        "note_with_offsets": {
-          "f1": 85.53414238214236,
-          "precision": null,
-          "recall": null
-        },
-        "note_with_offsets_and_velocity": {
-          "f1": 76.97348537260767,
-          "precision": null,
-          "recall": null
-        }
-      },
-      "evaluation_report": "docs/evaluations/shared-integration-35k.md",
-      "notes": "177 complete test tracks; unweighted per-track means. Frozen 35k candidate with preserved 15k reference publication. Imported original verified results without new inference or test-set tuning. Research reference, not product promotion. Latency not measured for the full publication path."
     }
   ]
 }

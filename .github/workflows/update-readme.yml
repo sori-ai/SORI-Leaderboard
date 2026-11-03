@@ -7,12 +7,10 @@ on:
       - 'data/samples/samples.json'
     branches:
       - main
-  pull_request:
   workflow_dispatch:  # 수동 실행 허용
 
 jobs:
   update-readme:
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: write

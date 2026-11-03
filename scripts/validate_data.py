@@ -67,22 +67,8 @@ def validate_references(results_path: Path, samples_path: Path) -> list[str]:
     except (FileNotFoundError, json.JSONDecodeError):
         return []  # 파일 에러는 이미 validate_file에서 처리됨
 
-    # Current v2 data uses models; retain legacy sample references as well.
-    model_ids = [m["id"] for m in results_data.get("models", [])]
-    benchmark_ids = [b["id"] for b in results_data.get("benchmarks", [])]
-    if len(model_ids) != len(set(model_ids)):
-        errors.append("Duplicate model IDs")
-    if len(benchmark_ids) != len(set(benchmark_ids)):
-        errors.append("Duplicate benchmark IDs")
-    for result in results_data.get("benchmark_results", []):
-        if result["model_id"] not in model_ids:
-            errors.append(f"Unknown model: {result['model_id']}")
-        if result["benchmark_id"] not in benchmark_ids:
-            errors.append(f"Unknown benchmark: {result['benchmark_id']}")
-        report = result.get("evaluation_report")
-        if report and not (results_path.parents[2] / report).is_file():
-            errors.append(f"Missing evaluation report: {report}")
-    valid_algorithms = set(model_ids) | {a["id"] for a in results_data.get("algorithms", [])}
+    # 유효한 algorithm ID 집합
+    valid_algorithms = {a["id"] for a in results_data.get("algorithms", [])}
 
     # samples.json의 results에서 참조하는 algorithm ID 확인
     for sample in samples_data.get("samples", []):
