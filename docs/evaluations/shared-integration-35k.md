@@ -1,32 +1,31 @@
-# Sori Shared Integration 35k
+# Sori Native 35k
 
-Added 2026-11-03; original evaluation 2026-10-24. Current shared-integration research reference, not a product release. The frozen 35k candidate uses its preserved 15k reference publication path.
+Evaluated 2026-11-03 on all 177 MAESTRO v3 test tracks. The frozen 35k candidate is evaluated through its own note decoder, with no 15k reference, completed-note merge, or online join. This is a research result, not a product release.
 
-## Evaluation
+Results are unweighted track-level means. Verified original pre-merge native states and velocities were reused with the original decoder, GT, time shift and scorer; each native prediction was scored once. No neural inference was repeated. Previous merged results are not the values reported here.
 
-Official MAESTRO v3 test split, all 177 complete tracks. Results are unweighted track-level means, not pooled-note scores or development-set results.
+| Metric | F1 | Precision | Recall |
+|:-------|---:|----------:|-------:|
+| Note | 96.745756 | 99.328412 | 94.389804 |
+| Note + Velocity | 77.314041 | 79.402417 | 75.409278 |
+| Note + Offsets | 80.580937 | 82.721258 | 78.628136 |
+| Note + Offsets + Velocity | 65.210362 | 66.953850 | 63.619670 |
 
-- Note F1: **96.816661%** (precision 98.468134%, recall 95.275539%).
-- Note + Velocity F1: **87.021734%**.
-- Note + Offsets F1: **85.534142%**.
-- Note + Offsets + Velocity F1: **76.973485%**.
+Onset tolerance is 50ms; pitch tolerance is 50 cents. Offset tolerance is `max(0.2 × reference duration, 0.05 seconds)`. Velocity uses per-track reference-range normalization, least-squares calibration and normalized error below 0.1. The 740,399 reference notes are preserved; onset counts are TP 689,599, FP 5,558 and FN 50,800 (not the macro averaging denominator).
 
-All 177 original saved prediction SHA-256 values were verified, and six stored metric series reproduce the original aggregate. No new inference or scoring was performed. Unavailable precision/recall values are not inferred.
+Reference events were converted from five-state labels (20ms/frame, relative pitch +21). Exact original-MIDI pedal/timing equivalence and the historical mir_eval version are unverified; exact protocol equivalence with other historical rows is not established.
 
-Onset tolerance is 50 ms; pitch tolerance is 50 cents. Offset tolerance is `max(0.2 × reference duration, 0.05 seconds)`. Velocity uses per-track reference-range normalization, least-squares predicted-velocity calibration and absolute normalized error below 0.1. Predictions retain the original continuous autoregressive decoder/publication path with 400-frame chunks.
+## Model size and delay
 
-Reference events come from saved five-state labels converted to notes (20 ms/frame, relative pitch + 21). Exact original-MIDI pedal/timing equivalence and the historical `mir_eval` package version are unverified. Exact protocol equivalence with historical leaderboard rows is therefore not established.
+The executed native path contains **853,807 parameters across 132 tensors**. The training graph contains 1,061,629 parameters; the unused reference branch is excluded from the active count.
 
-## Provenance and limits
+Model lookahead is **204ms**: centered FFT 64ms + temporal CNN 40ms + pitchwise temporal layers 60ms + future adapter 40ms. Finite lookahead is part of the real-time design. Input-call rounding adds up to 16ms separately; hardware processing and queue latency are not measured. The figure plots model lookahead, not measured end-to-end device latency.
 
-- Candidate checkpoint SHA-256: `424826a13ea40117b625ba926f53720552096a789d4eaace4ef99fe52d35b842`.
-- Reference checkpoint SHA-256: `b14a34920c8fe35543ccabfb573441b9e06a19246171018786c8574f90108205`.
-- Evaluation source: `e1be176f2231953c8a30148768acaaed4049011b`.
-- Scorer SHA-256: `deeedc64f7e6b1935753a69e69da94ae4b54b28356793048a5534aa8adf04b27`.
-- Prediction manifest SHA-256: `7593009a852e1ce57784f6e15faf7155b24777962844cc4eea8293d58392d46c`.
+The retained inference used 400-frame acoustic chunks. CPU finite-support checks and causal recurrent decoding support the bounded-context interpretation; this result is not a new 177-track live transport benchmark, and continuous-window boundary outputs are not claimed identical to the retained chunked outputs. No future completed reference-note interval is used to accept or retract a native note.
 
-The actual reconstructed candidate and independently held reference each contain 1,061,629 parameters: **2,123,258 total (2.12M)**. The reference is not registered inside the candidate, so this does not double-count it. This is the resident model size; some registered modules are bypassed during inference.
+## Provenance
 
-The reported evaluation combines completed parent/candidate note intervals, admitting candidates only after same-pitch interval-overlap and onset-neighborhood checks. The table and figure therefore place this **evaluated publication path in Offline**, not at a guessed fixed real-time delay. This does not classify every underlying network as offline.
-
-Algorithmic lookahead and device processing time are different quantities. The centered 2,048-sample FFT at 16 kHz alone needs 64 ms of future audio; the future adapter adds two 20 ms frames. This partial 104 ms sum does not include all acoustic temporal layers or the complete-note publication policy and is not used as an end-to-end delay. No device timing benchmark is claimed.
+- Checkpoint SHA-256: `424826a13ea40117b625ba926f53720552096a789d4eaace4ef99fe52d35b842`.
+- Original inference source: `e1be176f2231953c8a30148768acaaed4049011b`.
+- Original scorer SHA-256: `deeedc64f7e6b1935753a69e69da94ae4b54b28356793048a5534aa8adf04b27`.
+- 177 original pre-merge native outputs were verified. Native device-set results have not been measured; prior merged scores are not inherited.
