@@ -21,6 +21,30 @@
 
 Quantitative evaluation results on standard datasets.
 
+### Recent offline evaluation
+
+The following full-recording results use a documented evaluation protocol and are
+reported separately from the historical leaderboard below, whose ground-truth
+processing and aggregation are not fully documented. The test set has been used
+for prior experiments, so these results are not an untouched final test.
+
+| System | Original ground truth | T2-cleaned ground truth |
+|:-------|----------------------:|------------------------:|
+| TransKun 2.0.1 | 98.38493 | 98.51155 |
+| SORI Current | 98.37483 | 98.51924 |
+| **SORI Current + TransKun 2.0.1 (raw UNION)** | **98.57212** | **98.69965** |
+
+Values are per-recording macro mean onset F1 (%), on all 177 MAESTRO v3 test
+recordings, with same-pitch one-to-one matching within 50 ms. UNION combines
+Current with Stock TransKun predictions; it is an offline two-model system.
+T2 removes 2,404 audited notes from the original reference MIDI, not from the
+predictions. See [evaluation details](docs/recent-offline-evaluation.md) for
+protocol and limitations. Offset and velocity scores are not reported for this
+evaluation.
+
+The real-time results below are historical. Newer real-time experiments found
+so far use different evaluation coverage and are not added to this table.
+
 ### Note F1 vs Latency Trade-off
 
 <p align="center">
