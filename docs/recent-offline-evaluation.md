@@ -53,9 +53,9 @@ alone is not a result for the peak bonus plus seam fix.
 A different selective onset correction was also evaluated with UNION on the T2
 test: Current macro onset F1 improved from 98.51937% to 98.52664%, while its
 paired UNION changed from 98.69974% to 98.68819%. This correction is distinct
-from the weak peak bonus above. The effect of the weak peak bonus and seam fix
-on the complete UNION has not been established by these experiments; Current's
-improvement cannot be substituted for a measured UNION result.
+from the weak peak bonus above. The weak peak bonus was subsequently evaluated with the ensemble below. The
+combined effect of that bonus and the seam fix on the ensemble has not yet been
+established; Current's improvement cannot be substituted for a UNION result.
 
 ## Full-test note attribute evaluation
 

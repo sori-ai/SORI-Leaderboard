@@ -42,7 +42,8 @@ predictions. See [evaluation details](docs/recent-offline-evaluation.md) for
 protocol and limitations. Offset and velocity scores are not reported for this
 evaluation. Recent decoder experiments improve Current-only onset F1; see the
 [decoder results and limitations](docs/recent-offline-evaluation.md#decoder-experiments-october-2026).
-Their effect on the full UNION has not been established.
+The weak peak bonus was also evaluated with the ensemble below; the seam fix
+has not yet been evaluated with it.
 
 ### Sori-Ensemble: full-test note attributes
 
