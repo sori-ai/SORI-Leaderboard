@@ -59,15 +59,6 @@
       "delay_ms": 320
     },
     {
-      "id": "sori-offline-iterative",
-      "name": "Sori-Offline_Iterative",
-      "is_ours": true,
-      "description": "Offline iterative Audio-to-MIDI engine",
-      "delay_ms": null,
-      "internal_name": "Offline_Iterative",
-      "training_notes": "Iterative refinement for high accuracy"
-    },
-    {
       "id": "bytedance-regressing-onsets",
       "name": "Bytedance",
       "is_ours": false,
@@ -103,34 +94,6 @@
   ],
   "benchmark_results": [
     {
-      "model_id": "sori-offline-iterative",
-      "benchmark_id": "maestro-v3-test",
-      "tested_date": "2025-01-06",
-      "metrics": {
-        "note": {
-          "f1": 98.41,
-          "precision": 99.47,
-          "recall": 97.40
-        },
-        "note_with_velocity": {
-          "f1": 80.16,
-          "precision": null,
-          "recall": null
-        },
-        "note_with_offsets": {
-          "f1": 80.67,
-          "precision": 81.51,
-          "recall": 79.86
-        },
-        "note_with_offsets_and_velocity": {
-          "f1": null,
-          "precision": null,
-          "recall": null
-        }
-      },
-      "notes": "Offline iterative model, velocity/offset evaluated separately"
-    },
-    {
       "model_id": "sori-realtime-4.8m-192ms",
       "benchmark_id": "maestro-v3-test",
       "tested_date": "2025-01-06",
@@ -164,14 +127,14 @@
       "tested_date": "2025-01-06",
       "metrics": {
         "note": {
-          "f1": 96.490,
+          "f1": 96.49,
           "precision": 99.109,
           "recall": 94.092
         },
         "note_with_velocity": {
           "f1": 90.657,
           "precision": 93.085,
-          "recall": 88.430
+          "recall": 88.43
         },
         "note_with_offsets": {
           "f1": 70.421,
@@ -198,7 +161,7 @@
         },
         "note_with_velocity": {
           "f1": 80.095,
-          "precision": 90.370,
+          "precision": 90.37,
           "recall": 72.763
         },
         "note_with_offsets": {
@@ -207,7 +170,7 @@
           "recall": 41.874
         },
         "note_with_offsets_and_velocity": {
-          "f1": 43.150,
+          "f1": 43.15,
           "precision": 48.055,
           "recall": 39.573
         }
@@ -236,8 +199,8 @@
         },
         "note_with_offsets_and_velocity": {
           "f1": 71.104,
-          "precision": 72.660,
-          "recall": 69.670
+          "precision": 72.66,
+          "recall": 69.67
         }
       },
       "notes": "MAE pretrained model, evaluated on 177 test tracks"

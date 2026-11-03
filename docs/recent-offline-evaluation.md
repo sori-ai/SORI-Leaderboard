@@ -8,9 +8,9 @@ values, using one-to-one same-pitch matching with a 50 ms onset tolerance.
 |:-------|-------------------------:|---------------------------:|
 | TransKun 2.0.1 (Stock) | 98.38493 | 98.51155 |
 | SORI Current | 98.37483 | 98.51924 |
-| Raw Current + Stock UNION | 98.57212 | 98.69965 |
+| Sori-Ensemble (raw Current + Stock UNION) | 98.57212 | 98.69965 |
 
-The raw UNION retains Current notes and adds Stock notes unmatched within
+Sori-Ensemble retains Current notes and adds Stock notes unmatched within
 50 ms. It uses two models and is an offline system. Under the T2 protocol,
 2,404 identified erroneous notes are removed from the original key-release
 reference MIDI; predictions are not filtered. Original-GT and T2 scores are

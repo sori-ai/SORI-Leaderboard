@@ -32,10 +32,10 @@ for prior experiments, so these results are not an untouched final test.
 |:-------|----------------------:|------------------------:|
 | TransKun 2.0.1 | 98.38493 | 98.51155 |
 | SORI Current | 98.37483 | 98.51924 |
-| **SORI Current + TransKun 2.0.1 (raw UNION)** | **98.57212** | **98.69965** |
+| **Sori-Ensemble** | **98.57212** | **98.69965** |
 
 Values are per-recording macro mean onset F1 (%), on all 177 MAESTRO v3 test
-recordings, with same-pitch one-to-one matching within 50 ms. UNION combines
+recordings, with same-pitch one-to-one matching within 50 ms. Sori-Ensemble combines
 Current with Stock TransKun predictions; it is an offline two-model system.
 T2 removes 2,404 audited notes from the original reference MIDI, not from the
 predictions. See [evaluation details](docs/recent-offline-evaluation.md) for
@@ -47,18 +47,13 @@ Their effect on the full UNION has not been established.
 The real-time results below are historical. Newer real-time experiments found
 so far use different evaluation coverage and are not added to this table.
 
-### Note F1 vs Latency Trade-off
 
-<p align="center">
-  <img src="assets/images/note_f1_vs_delay.png" alt="Note F1 vs Delay" width="800"/>
-</p>
 
 <!-- BENCHMARK_TABLE_START -->
 ### MAESTRO v3 Test Set (177 tracks)
 
 | Model | Note F1 | Note+Vel F1 | Note+Off F1 | Note+Off+Vel F1 | Params | Delay |
 |:------|:-------:|:-----------:|:-----------:|:---------------:|:------:|:-----:|
-| **Sori-Offline_Iterative** | 98.41 | 80.16 | 80.67 | N/A | N/A | Offline |
 | Semi-CRF | 98.32 | 92.94 | 93.48 | N/A | N/A | Offline |
 | **Sori-Realtime4.8M_192ms** | 97.44 | 95.08 | 72.91 | 71.44 | 4.8M | 192ms |
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
@@ -72,15 +67,6 @@ so far use different evaluation coverage and are not added to this table.
 
 <details>
 <summary>View Detailed Metrics</summary>
-
-#### Sori-Offline_Iterative
-
-| Metric | F1 | Precision | Recall |
-|:-------|:--:|:---------:|:------:|
-| Note (onset only) | 98.41 | 99.47 | 97.40 |
-| Note + Velocity | 80.16 | N/A | N/A |
-| Note + Offsets | 80.67 | 81.51 | 79.86 |
-| Note + Offsets + Velocity | N/A | N/A | N/A |
 
 #### Sori-Realtime4.8M_192ms
 
@@ -139,7 +125,7 @@ so far use different evaluation coverage and are not added to this table.
 
 | Model | Parameters | Delay | Features |
 |:------|:----------:|:-----:|:---------|
-| **Sori-Offline_Iterative** | N/A | Offline | Highest accuracy with iterative refinement |
+| **Sori-Ensemble** | N/A | Offline | Combines SORI Current and TransKun 2.0.1 |
 | **Sori-Realtime4.8M_192ms** | 4.8M | 192ms | Best real-time performance |
 | **Sori-Realtime4.8M_192ms_SS** | 4.8M | 192ms | Source separation for noisy environments |
 | **Sori-Realtime4.8M_104ms** | 4.8M | 104ms | Low latency with improved offset accuracy |
