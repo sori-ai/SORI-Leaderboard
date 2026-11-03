@@ -21,64 +21,23 @@
 
 Quantitative evaluation results on standard datasets.
 
-### Recent offline evaluation
-
-The following full-recording results use a documented evaluation protocol and are
-reported separately from the historical leaderboard below, whose ground-truth
-processing and aggregation are not fully documented. The test set has been used
-for prior experiments, so these results are not an untouched final test.
-
-| System | Original ground truth | T2-cleaned ground truth |
-|:-------|----------------------:|------------------------:|
-| TransKun 2.0.1 | 98.38493 | 98.51155 |
-| SORI Current | 98.37483 | 98.51924 |
-| **Sori-Ensemble** | **98.57212** | **98.69965** |
-
-Values are per-recording macro mean onset F1 (%), on all 177 MAESTRO v3 test
-recordings, with same-pitch one-to-one matching within 50 ms. Sori-Ensemble combines
-Current with Stock TransKun predictions; it is an offline two-model system.
-T2 removes 2,404 audited notes from the original reference MIDI, not from the
-predictions. See [evaluation details](docs/recent-offline-evaluation.md) for
-protocol and limitations. Offset and velocity scores are not reported for this
-evaluation. Recent decoder experiments improve Current-only onset F1; see the
-[decoder results and limitations](docs/recent-offline-evaluation.md#decoder-experiments-october-2026).
-The weak peak bonus and seam fix were also evaluated with the ensemble below.
-
 ### Sori-Ensemble: T2 + sustain test results
 
 Full MAESTRO v3 test set (177 complete recordings), per-recording macro F1 (%).
-The T2 protocol removes 2,404 audited erroneous notes **before** sustain-pedal
-extension. Velocity uses the `mir_eval` per-recording affine fit and 0.1
-normalized tolerance. These are experimental offline results.
+Sori-Ensemble combines SORI Current with TransKun 2.0.1, with weak onset-peak
+bonus and the segment-boundary seam fix. The T2 protocol removes 2,404 audited
+erroneous notes **before** sustain-pedal extension.
 
 | System | Note | Note + velocity | Note + offset | Note + offset + velocity |
 |:-------|-----:|----------------:|--------------:|-------------------------:|
-| **Sori-Ensemble (baseline)** | 98.69952 | 98.04167 | 93.60831 | 93.03024 |
-| Sori-Ensemble + weak onset-peak bonus | 98.69195 | 98.02446 | 93.63808 | 93.04689 |
-| **Sori-Ensemble + weak peak + seam fix** | **98.71075** | **98.04305** | **93.68190** | **93.09061** |
+| **Sori-Ensemble** | **98.71075** | **98.04305** | **93.68190** | **93.09061** |
 
 The seam fix was motivated by examples from the test set; this is not an
-independent final test of that rule. See [evaluation details](docs/recent-offline-evaluation.md#t2-with-sustain-extension) for the reference construction and limits.
+independent final test of that rule. The historical results below use protocols
+whose reference processing and aggregation are not fully documented, so direct
+comparison is not established. See [evaluation details](docs/recent-offline-evaluation.md).
 
-### Sori-Ensemble: full-test note attributes
-
-Full MAESTRO v3 test set, macro F1 (%) over 177 full recordings. These rows
-use the original reference notes; the second row extends their durations using
-the sustain pedal. Velocity matching uses a per-recording affine fit and 0.1
-normalized tolerance. The system is the baseline Current + Stock ensemble.
-
-| Reference note end | Note | Note + velocity | Note + offset | Note + offset + velocity |
-|:-------------------|-----:|----------------:|--------------:|-------------------------:|
-| Original key release | 98.57221 | 97.91850 | 42.96816 | 42.79684 |
-| Sustain-extended | 98.57221 | 97.91850 | 93.41812 | 92.84823 |
-
-The system predicts sustained note durations; the reference definition has a
-large effect on offset scores. [Details and decoder comparison](docs/recent-offline-evaluation.md#full-test-note-attribute-evaluation).
-
-The real-time results below are historical. Newer real-time experiments found
-so far use different evaluation coverage and are not added to this table.
-
-
+The real-time results below are historical.
 
 <!-- BENCHMARK_TABLE_START -->
 ### MAESTRO v3 Test Set (177 tracks)
@@ -156,7 +115,7 @@ so far use different evaluation coverage and are not added to this table.
 
 | Model | Parameters | Delay | Features |
 |:------|:----------:|:-----:|:---------|
-| **Sori-Ensemble** | N/A | Offline | Combines SORI Current and TransKun 2.0.1 |
+| **Sori-Ensemble** | N/A | Offline | Combines SORI Current and TransKun 2.0.1 with onset and seam corrections |
 | **Sori-Realtime4.8M_192ms** | 4.8M | 192ms | Best real-time performance |
 | **Sori-Realtime4.8M_192ms_SS** | 4.8M | 192ms | Source separation for noisy environments |
 | **Sori-Realtime4.8M_104ms** | 4.8M | 104ms | Low latency with improved offset accuracy |
