@@ -21,6 +21,7 @@ The four F1 values are arithmetic means over **177 complete tracks**, not scores
 - Note F1 ignores offsets. Offset metrics additionally use `max(0.2 × reference duration, 0.05 seconds)`.
 - Velocity uses the original mir_eval-compatible ordered matching, per-track normalization `(v - min(v)) / max(1, max(v) - min(v))` and least-squares calibration of predicted velocity, with absolute normalized error below 0.1. This is **not raw MIDI velocity MAE**.
 - Frozen predictions, original decoder/publication and metric outputs are reused. No new inference, re-scoring, threshold search or test-based checkpoint selection was performed for this update.
+- Reference events were consumed from the saved five-state-label-to-note extraction path, using the frame/pitch conversion above. Exact equivalence to the original MIDI's pedal handling and timing shifts has **not been verified**. The original runtime's `mir_eval` package version was not recorded; a currently installed version is not substituted for it. These limits apply to this result itself, not only to historical rows.
 
 ## Verification and provenance
 
@@ -36,6 +37,6 @@ The historical leaderboard does not ship its original inference/scoring runner o
 
 ## Parameters and latency
 
-CPU reconstruction counts 1,061,629 registered parameters in the candidate graph and another 1,061,629 in its independently held reference graph (2,123,258 registered parameters in total). The candidate native submodule has 836,399 parameters. Registered graph totals are not a certified count of only the modules consumed by the evaluated publication path; the headline parameter field remains unavailable rather than substituting the native submodule count.
+CPU reconstruction counts 1,061,629 registered parameters in the candidate graph and another 1,061,629 in its independently held reference graph (2,123,258 resident parameters in total). The reference is not registered inside the candidate graph, so this sum does not double-count it. The candidate native submodule has 836,399 parameters. Resident totals are not a certified count of only the modules consumed by the evaluated publication path; the headline parameter field remains unavailable rather than substituting the native submodule count.
 
 The frontend uses 16 kHz audio, a 2,048-sample centered FFT and a 320-sample hop. Its nominal right-context support is 64 ms from the FFT plus two frames (40 ms), or **104 ms**. This is not a measured complete note-emission delay, application latency or device real-time factor. Full-path delay is consequently marked **Not measured**, and this model is omitted from the latency plot.

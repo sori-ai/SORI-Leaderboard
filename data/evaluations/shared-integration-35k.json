@@ -23,6 +23,9 @@
     "metric/note-with-offsets-and-velocity/f1": 0.7697348537260766
   },
   "scoring": {
+    "historical_mir_eval_version": null,
+    "reference_event_source": "saved five-state labels converted to note events",
+    "original_midi_pedal_and_timing_equivalence_verified": false,
     "frame_to_sec": ".02",
     "pitch_to_midi": "21+relativepitch",
     "onset_tolerance_seconds": 0.05,
