@@ -21,7 +21,14 @@
       "note_velocity_f1": 98.0244643899653,
       "note_offset_f1": 93.63807615252185,
       "note_offset_velocity_f1": 93.04689282561388
+    },
+    {
+      "system": "Sori-Ensemble + weak onset-peak bonus + seam fix",
+      "note_f1": 98.71075325691876,
+      "note_velocity_f1": 98.04305475399362,
+      "note_offset_f1": 93.68189595365017,
+      "note_offset_velocity_f1": 93.09061433467855
     }
   ],
-  "limitations": "Saved predictions combined in memory; seam fix not included; test set previously used in research."
+  "limitations": "Saved Stock predictions and Current predictions combined in memory; seam rule was motivated by T2 test examples; test set previously used in research; experimental, not deployed defaults."
 }

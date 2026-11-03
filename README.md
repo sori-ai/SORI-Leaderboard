@@ -42,8 +42,7 @@ predictions. See [evaluation details](docs/recent-offline-evaluation.md) for
 protocol and limitations. Offset and velocity scores are not reported for this
 evaluation. Recent decoder experiments improve Current-only onset F1; see the
 [decoder results and limitations](docs/recent-offline-evaluation.md#decoder-experiments-october-2026).
-The weak peak bonus was also evaluated with the ensemble below; the seam fix
-has not yet been evaluated with it.
+The weak peak bonus and seam fix were also evaluated with the ensemble below.
 
 ### Sori-Ensemble: T2 + sustain test results
 
@@ -54,10 +53,12 @@ normalized tolerance. These are experimental offline results.
 
 | System | Note | Note + velocity | Note + offset | Note + offset + velocity |
 |:-------|-----:|----------------:|--------------:|-------------------------:|
-| **Sori-Ensemble** | **98.69952** | **98.04167** | 93.60831 | 93.03024 |
-| Sori-Ensemble + weak onset-peak bonus | 98.69195 | 98.02446 | **93.63808** | **93.04689** |
+| **Sori-Ensemble (baseline)** | 98.69952 | 98.04167 | 93.60831 | 93.03024 |
+| Sori-Ensemble + weak onset-peak bonus | 98.69195 | 98.02446 | 93.63808 | 93.04689 |
+| **Sori-Ensemble + weak peak + seam fix** | **98.71075** | **98.04305** | **93.68190** | **93.09061** |
 
-The seam fix is not included. See [evaluation details](docs/recent-offline-evaluation.md#t2-with-sustain-extension) for the reference construction and limits.
+The seam fix was motivated by examples from the test set; this is not an
+independent final test of that rule. See [evaluation details](docs/recent-offline-evaluation.md#t2-with-sustain-extension) for the reference construction and limits.
 
 ### Sori-Ensemble: full-test note attributes
 

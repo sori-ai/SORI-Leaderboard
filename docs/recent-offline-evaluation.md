@@ -53,9 +53,8 @@ alone is not a result for the peak bonus plus seam fix.
 A different selective onset correction was also evaluated with UNION on the T2
 test: Current macro onset F1 improved from 98.51937% to 98.52664%, while its
 paired UNION changed from 98.69974% to 98.68819%. This correction is distinct
-from the weak peak bonus above. The weak peak bonus was subsequently evaluated with the ensemble below. The
-combined effect of that bonus and the seam fix on the ensemble has not yet been
-established; Current's improvement cannot be substituted for a UNION result.
+from the weak peak bonus above. The weak peak bonus and seam fix were subsequently
+evaluated with the ensemble on T2 with sustain extension, as reported below.
 
 ## Full-test note attribute evaluation
 
@@ -101,13 +100,27 @@ excluded note from truncating a retained note during pedal extension.
 |:-------|-----:|----------------:|--------------:|-------------------------:|
 | Sori-Ensemble | 98.69952 | 98.04167 | 93.60831 | 93.03024 |
 | Sori-Ensemble + weak onset-peak bonus | 98.69195 | 98.02446 | 93.63808 | 93.04689 |
+| Sori-Ensemble + weak peak + seam fix | 98.71075 | 98.04305 | 93.68190 | 93.09061 |
 
 Values are percent, per-recording macro F1. Matching uses the onset, offset,
-and velocity tolerances described above. Both rows use saved Current and Stock
-predictions combined in memory; neither includes the seam fix. The bonus raises
-offset F1 by 0.02977 percentage points while reducing onset F1 by 0.00757
-points. Test recordings have been used in previous research and are not an
-untouched test. The historical table's reference processing is not sufficiently
+and velocity tolerances described above. All rows use Current and saved Stock
+predictions combined in memory. The seam
+variant uses weak peak bonus plus the unfinished-note boundary rule. Compared
+with weak peak alone, it improves macro onset F1 by 0.01880 percentage points
+and offset F1 by 0.04382 points. Onset F1 improves on 32 recordings and is
+unchanged on 145; onset+velocity F1 improves on 31, regresses on one, and is
+unchanged on 145. The seam rule was motivated by T2 test examples, so this is
+not an independent final test of that rule; a genuine boundary reattack could
+still be merged. Test recordings have also been used in previous research. The
+historical table's reference processing is not sufficiently
 specified for direct offset or velocity comparison.
 
 Machine-readable results: [T2 sustain evaluation](../data/benchmarks/t2-sustain-results.json).
+
+The seam-variant Current inference ran on three RTX 3090 GPUs with the same
+checkpoint and decoder source as the prior Current experiments. Test audio was
+verified against source SHA-256 for all 177 recordings. A representative
+recording without the seam fix reproduced the earlier peak-bonus MIDI exactly
+for pitch, onset, offset and velocity. The three seam outputs covered 177
+distinct tracks, and their transferred MIDI hashes were verified before scoring.
+The seam variant is an experiment and is not a claim about deployed defaults.
