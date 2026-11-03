@@ -19,7 +19,7 @@ def load_json(path: Path) -> dict:
         return json.load(f)
 
 
-def generate_benchmark_table(results_data: dict) -> str:
+def generate_benchmark_table(results_data: dict, ensemble_data: dict | None = None) -> str:
     """벤치마크 테이블 Markdown 생성"""
     models = {m["id"]: m for m in results_data["models"]}
     benchmarks = {b["id"]: b for b in results_data["benchmarks"]}
@@ -45,6 +45,14 @@ def generate_benchmark_table(results_data: dict) -> str:
         output_lines.append("")
         output_lines.append("| Model | Note F1 | Note+Vel F1 | Note+Off F1 | Note+Off+Vel F1 | Params | Delay |")
         output_lines.append("|:------|:-------:|:-----------:|:-----------:|:---------------:|:------:|:-----:|")
+
+        if benchmark_id == "maestro-v3-test" and ensemble_data:
+            ensemble = ensemble_data["results"][0]
+            output_lines.append(
+                "| **Sori-Ensemble**¹ | "
+                f"**{ensemble['note_f1']:.2f}** | **{ensemble['note_velocity_f1']:.2f}** | "
+                f"**{ensemble['note_offset_f1']:.2f}** | **{ensemble['note_offset_velocity_f1']:.2f}** | N/A | Offline |"
+            )
 
         # note f1 기준 정렬 (내림차순)
         sorted_results = sorted(
@@ -90,6 +98,15 @@ def generate_benchmark_table(results_data: dict) -> str:
 
             row = [name, note_f1, note_vel_f1, note_off_f1, note_off_vel_f1, params, delay]
             output_lines.append("| " + " | ".join(row) + " |")
+
+        if benchmark_id == "maestro-v3-test" and ensemble_data:
+            output_lines.extend([
+                "",
+                "¹ Sori-Ensemble uses T2-cleaned references with sustain extension, averaged",
+                "per recording. The seam fix was motivated by test examples. Historical rows",
+                "have incompletely documented reference processing and aggregation, so direct",
+                "comparison is not established. [Evaluation details](docs/recent-offline-evaluation.md).",
+            ])
 
         # Detailed metrics (Sori models only)
         output_lines.append("")
@@ -193,7 +210,7 @@ def main():
         readme_content = f.read()
     
     # 각 섹션 생성 및 업데이트
-    benchmark_table = generate_benchmark_table(results_data)
+    benchmark_table = generate_benchmark_table(results_data, load_json(root_dir / "data" / "benchmarks" / "t2-sustain-results.json"))
     sample_gallery = generate_sample_gallery(samples_data)
     last_updated = generate_last_updated(results_data)
     
