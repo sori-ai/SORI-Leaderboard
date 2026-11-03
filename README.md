@@ -37,7 +37,7 @@ Quantitative evaluation results on standard datasets.
 | **Sori-Realtime4.8M_192ms** | 97.44 | 95.08 | 72.91 | 71.44 | 4.8M | 192ms |
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
 | **Sori-Realtime4.8M_104ms** | 96.99 | 92.72 | 86.17 | 82.58 | 4.8M | 104ms |
-| **Sori-Shared-Integration-35k** | 96.82 | 87.02 | 85.53 | 76.97 | N/A | Not measured |
+| **Sori-Shared-Integration-35k** | 96.82 | 87.02 | 85.53 | 76.97 | 2.12M* | Offline* |
 | Bytedance | 96.80 | N/A | 84.70 | 83.30 | 20.2M | Offline |
 | **Sori-Realtime4.8M_192ms_SS** | 96.49 | 90.66 | 70.42 | 66.61 | 4.8M | 192ms |
 | Yamaha Mobile-AMT | 96.30 | N/A | 76.80 | 75.53 | 5.9M | 10s |
@@ -84,7 +84,7 @@ Quantitative evaluation results on standard datasets.
 | Note + Offsets | 85.53 | N/A | N/A |
 | Note + Offsets + Velocity | 76.97 | N/A | N/A |
 
-Current research reference, not a product release. Full-path latency is unmeasured, so this model is not plotted. [Evaluation details](docs/evaluations/shared-integration-35k.md).
+Current research reference, not a product release. *Parameters count both resident graphs; the reported evaluation combines completed note intervals offline. [Evaluation details](docs/evaluations/shared-integration-35k.md).
 
 #### Sori-Realtime4.8M_192ms_SS
 

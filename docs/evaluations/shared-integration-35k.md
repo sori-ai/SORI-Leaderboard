@@ -25,4 +25,8 @@ Reference events come from saved five-state labels converted to notes (20 ms/fra
 - Scorer SHA-256: `deeedc64f7e6b1935753a69e69da94ae4b54b28356793048a5534aa8adf04b27`.
 - Prediction manifest SHA-256: `7593009a852e1ce57784f6e15faf7155b24777962844cc4eea8293d58392d46c`.
 
-Active-path parameter count and full-path latency are unverified. The two resident graphs total 2,123,258 parameters, but inference bypasses some modules. Nominal frontend support is 104 ms (centered FFT plus two future frames); this is not a complete note-emission delay and is not plotted as one.
+The actual reconstructed candidate and independently held reference each contain 1,061,629 parameters: **2,123,258 total (2.12M)**. The reference is not registered inside the candidate, so this does not double-count it. This is the resident model size; some registered modules are bypassed during inference.
+
+The reported evaluation combines completed parent/candidate note intervals, admitting candidates only after same-pitch interval-overlap and onset-neighborhood checks. The table and figure therefore place this **evaluated publication path in Offline**, not at a guessed fixed real-time delay. This does not classify every underlying network as offline.
+
+Algorithmic lookahead and device processing time are different quantities. The centered 2,048-sample FFT at 16 kHz alone needs 64 ms of future audio; the future adapter adds two 20 ms frames. This partial 104 ms sum does not include all acoustic temporal layers or the complete-note publication policy and is not used as an end-to-end delay. No device timing benchmark is claimed.
