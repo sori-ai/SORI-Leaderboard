@@ -21,11 +21,15 @@
 
 Quantitative evaluation results on standard datasets.
 
+**2026-11-03 update:** Added the current shared-integration research reference on all 177 MAESTRO v3 test tracks. This is not a product-release announcement. [Evaluation details](docs/evaluations/shared-integration-35k.md).
+
 ### Note F1 vs Latency Trade-off
 
 <p align="center">
   <img src="assets/images/note_f1_vs_delay.png" alt="Note F1 vs Delay" width="800"/>
 </p>
+
+Models with unmeasured end-to-end latency remain in the table but are omitted from the latency plot. Historical results retain their reported protocols.
 
 <!-- BENCHMARK_TABLE_START -->
 ### MAESTRO v3 Test Set (177 tracks)
@@ -37,6 +41,7 @@ Quantitative evaluation results on standard datasets.
 | **Sori-Realtime4.8M_192ms** | 97.44 | 95.08 | 72.91 | 71.44 | 4.8M | 192ms |
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
 | **Sori-Realtime4.8M_104ms** | 96.99 | 92.72 | 86.17 | 82.58 | 4.8M | 104ms |
+| **Sori-Shared-Integration-35k** | 96.82 | 87.02 | 85.53 | 76.97 | N/A | Not measured |
 | Bytedance | 96.80 | N/A | 84.70 | 83.30 | 20.2M | Offline |
 | **Sori-Realtime4.8M_192ms_SS** | 96.49 | 90.66 | 70.42 | 66.61 | 4.8M | 192ms |
 | Yamaha Mobile-AMT | 96.30 | N/A | 76.80 | 75.53 | 5.9M | 10s |
@@ -73,6 +78,17 @@ Quantitative evaluation results on standard datasets.
 | Note + Velocity | 92.72 | 94.46 | 91.10 |
 | Note + Offsets | 86.17 | 87.77 | 84.68 |
 | Note + Offsets + Velocity | 82.58 | 84.10 | 81.15 |
+
+#### Sori-Shared-Integration-35k
+
+| Metric | F1 | Precision | Recall |
+|:-------|:--:|:---------:|:------:|
+| Note (onset only) | 96.82 | 98.47 | 95.28 |
+| Note + Velocity | 87.02 | N/A | N/A |
+| Note + Offsets | 85.53 | N/A | N/A |
+| Note + Offsets + Velocity | 76.97 | N/A | N/A |
+
+[Evaluation protocol and provenance](docs/evaluations/shared-integration-35k.md)
 
 #### Sori-Realtime4.8M_192ms_SS
 
@@ -114,6 +130,7 @@ Quantitative evaluation results on standard datasets.
 | Model | Parameters | Delay | Features |
 |:------|:----------:|:-----:|:---------|
 | **Sori-Offline_Iterative** | N/A | Offline | Highest accuracy with iterative refinement |
+| **Sori-Shared-Integration-35k** | Not verified | Not measured | Current shared-integration research reference; not deployed |
 | **Sori-Realtime4.8M_192ms** | 4.8M | 192ms | Best real-time performance |
 | **Sori-Realtime4.8M_192ms_SS** | 4.8M | 192ms | Source separation for noisy environments |
 | **Sori-Realtime4.8M_104ms** | 4.8M | 104ms | Low latency with improved offset accuracy |
@@ -139,7 +156,7 @@ For inquiries, please contact:
 ---
 
 <!-- LAST_UPDATED_START -->
-*Last updated: 2026-01-20 | Data version: v2.9.0*
+*Last updated: 2026-11-03 | Data version: v2.10.0*
 <!-- LAST_UPDATED_END -->
 
 <p align="center">
