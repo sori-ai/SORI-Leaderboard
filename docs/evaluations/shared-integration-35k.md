@@ -1,6 +1,6 @@
 # Sori Native 35k
 
-Evaluated 2026-11-03 on all 177 MAESTRO v3 test tracks. The frozen 35k candidate is evaluated through its own note decoder, with no 15k reference, completed-note merge, or online join. This is a research result, not a product release.
+Evaluated 2026-11-03 on all 177 MAESTRO v3 test tracks. The frozen 35k candidate is evaluated through its own note decoder, with no 15k reference, completed-note merge, or online join. This is a native-only ablation, not the full corrected model with only completed-note merging removed. The original merged pipeline also used a separate 15k reference with ending and velocity corrections; those corrections are absent from this native-only result. A comparison retaining bounded corrections is pending.
 
 Results are unweighted track-level means. Verified original pre-merge native states and velocities were reused with the original decoder, GT, time shift and scorer; each native prediction was scored once. No neural inference was repeated. Previous merged results are not the values reported here.
 
@@ -17,7 +17,7 @@ Reference events were converted from five-state labels (20ms/frame, relative pit
 
 ## Model size and delay
 
-The executed native path contains **853,807 parameters across 132 tensors**. The training graph contains 1,061,629 parameters; the unused reference branch is excluded from the active count.
+The executed native path contains **853,807 parameters across 132 tensors**. The registered graph contains 1,061,629 parameters, including 207,822 parameters not executed by this native path. This difference does not represent a count of non-causal modules removed. The separate 15k reference is also excluded from this active count.
 
 Model lookahead is **204ms**: centered FFT 64ms + temporal CNN 40ms + pitchwise temporal layers 60ms + future adapter 40ms. Finite lookahead is part of the real-time design. Input-call rounding adds up to 16ms separately; hardware processing and queue latency are not measured. The figure plots model lookahead, not measured end-to-end device latency.
 

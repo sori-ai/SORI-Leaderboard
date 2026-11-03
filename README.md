@@ -84,7 +84,7 @@ Quantitative evaluation results on standard datasets.
 | Note + Offsets | 80.58 | 82.72 | 78.63 |
 | Note + Offsets + Velocity | 65.21 | 66.95 | 63.62 |
 
-Research model, without completed-note merging. *853,807 active inference parameters; 204ms model lookahead, excluding packet rounding and device processing time. [Evaluation details](docs/evaluations/shared-integration-35k.md).
+Native-only ablation; bounded ending and velocity correction branches are also absent. A corrected-model comparison without completed-note merging is pending. *853,807 active inference parameters; 204ms model lookahead, excluding packet rounding and device processing time. [Evaluation details](docs/evaluations/shared-integration-35k.md).
 
 #### Sori-Realtime4.8M_192ms_SS
 
