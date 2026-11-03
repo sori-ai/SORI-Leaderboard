@@ -44,6 +44,21 @@ evaluation. Recent decoder experiments improve Current-only onset F1; see the
 [decoder results and limitations](docs/recent-offline-evaluation.md#decoder-experiments-october-2026).
 Their effect on the full UNION has not been established.
 
+### Sori-Ensemble: full-test note attributes
+
+Full MAESTRO v3 test set, macro F1 (%) over 177 full recordings. These rows
+use the original reference notes; the second row extends their durations using
+the sustain pedal. Velocity matching uses a per-recording affine fit and 0.1
+normalized tolerance. The system is the baseline Current + Stock ensemble.
+
+| Reference note end | Note | Note + velocity | Note + offset | Note + offset + velocity |
+|:-------------------|-----:|----------------:|--------------:|-------------------------:|
+| Original key release | 98.57221 | 97.91850 | 42.96816 | 42.79684 |
+| Sustain-extended | 98.57221 | 97.91850 | 93.41812 | 92.84823 |
+
+The system predicts sustained note durations; the reference definition has a
+large effect on offset scores. [Details and decoder comparison](docs/recent-offline-evaluation.md#full-test-note-attribute-evaluation).
+
 The real-time results below are historical. Newer real-time experiments found
 so far use different evaluation coverage and are not added to this table.
 

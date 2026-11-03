@@ -56,3 +56,33 @@ paired UNION changed from 98.69974% to 98.68819%. This correction is distinct
 from the weak peak bonus above. The effect of the weak peak bonus and seam fix
 on the complete UNION has not been established by these experiments; Current's
 improvement cannot be substituted for a measured UNION result.
+
+## Full-test note attribute evaluation
+
+In November 2026, saved Current and Stock predictions were combined and scored
+on all 177 full MAESTRO test recordings. Both systems below use the same Stock
+predictions; the second uses the previously evaluated weak onset-peak bonus on
+Current. The seam fix is not included. The numbers are song-level macro F1 (%).
+
+| System | Reference note end | Note | Note + velocity | Note + offset | Note + offset + velocity |
+|:-------|:-------------------|-----:|----------------:|--------------:|-------------------------:|
+| Sori-Ensemble | Original key release | 98.57221 | 97.91850 | 42.96816 | 42.79684 |
+| Sori-Ensemble | Sustain-extended | 98.57221 | 97.91850 | 93.41812 | 92.84823 |
+| Sori-Ensemble + weak peak bonus | Original key release | 98.56710 | 97.90197 | 42.95592 | 42.78268 |
+| Sori-Ensemble + weak peak bonus | Sustain-extended | 98.56710 | 97.90197 | 93.45286 | 92.86766 |
+
+The sustain-extended reference retains the original notes and velocities and
+extends their endpoints using sustain pedal events. Pitch and onset are matched
+one-to-one within 50 ms; offset tolerance is max(50 ms, 20% of reference note
+duration). Velocity scoring follows `mir_eval.transcription_velocity`: an
+affine fit per recording and normalized velocity tolerance of 0.1. Scores are
+means of per-recording F1, not pooled note-level F1. The matching and velocity
+implementation was checked against `mir_eval` on a representative recording.
+
+The baseline is reconstructed from saved MIDI predictions, with UNION combined
+in memory; it was not serialized to MIDI and read back after combining. Its
+original-GT onset F1 (98.57221%) differs slightly from the historical evaluation
+above (98.57212%); these are separate evaluation runs. Weak peak improves the
+sustain-extended offset scores but slightly lowers onset and velocity scores.
+The reference processing for historical leaderboard rows is not fully known,
+so direct comparison of the offset and velocity values is not established.
