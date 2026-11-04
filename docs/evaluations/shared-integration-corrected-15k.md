@@ -1,6 +1,6 @@
 # Sori Corrected 15k
 
-The existing A15k checkpoint retains the original bounded PA, offset, dynamics, pitch, rescue and refiner corrections. Its standalone output does not use completed-parent-note interval merging. This is a research comparison; selection across the remaining best-model candidates is ongoing.
+The existing A15k checkpoint retains the original bounded PA, offset, dynamics, pitch, rescue and refiner corrections. Its standalone output does not use completed-parent-note interval merging. This checkpoint uses the single shared-backbone integration architecture with its trained correction branches. It does not automatically incorporate newer models developed independently for each task. This is a research comparison; selection across the remaining best-model candidates is ongoing.
 
 All 177 MAESTRO v3 test tracks were verified against the fixed reference-event arrays. Existing scalar results were reused; missing ordered pairs and velocity metrics were completed on CPU without neural inference.
 
