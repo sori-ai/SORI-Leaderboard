@@ -38,7 +38,7 @@ Quantitative evaluation results on standard datasets.
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
 | **Sori-Realtime4.8M_104ms** | 96.99 | 92.72 | 86.17 | 82.58 | 4.8M | 104ms |
 | Bytedance | 96.80 | N/A | 84.70 | 83.30 | 20.2M | Offline |
-| **Sori-Native-35k** | 96.75 | 77.31 | 80.58 | 65.21 | 0.854M* | 204ms* |
+| **Sori-Corrected-15k** | 96.73 | 86.99 | 85.48 | 76.96 | N/A* | N/A* |
 | **Sori-Realtime4.8M_192ms_SS** | 96.49 | 90.66 | 70.42 | 66.61 | 4.8M | 192ms |
 | Yamaha Mobile-AMT | 96.30 | N/A | 76.80 | 75.53 | 5.9M | 10s |
 | Google | 96.01 | N/A | 83.94 | 82.75 | 54M | Offline |
@@ -75,16 +75,16 @@ Quantitative evaluation results on standard datasets.
 | Note + Offsets | 86.17 | 87.77 | 84.68 |
 | Note + Offsets + Velocity | 82.58 | 84.10 | 81.15 |
 
-#### Sori-Native-35k
+#### Sori-Corrected-15k
 
 | Metric | F1 | Precision | Recall |
 |:-------|:--:|:---------:|:------:|
-| Note (onset only) | 96.75 | 99.33 | 94.39 |
-| Note + Velocity | 77.31 | 79.40 | 75.41 |
-| Note + Offsets | 80.58 | 82.72 | 78.63 |
-| Note + Offsets + Velocity | 65.21 | 66.95 | 63.62 |
+| Note (onset only) | 96.73 | 98.53 | 95.06 |
+| Note + Velocity | 86.99 | N/A | N/A |
+| Note + Offsets | 85.48 | 87.06 | 84.02 |
+| Note + Offsets + Velocity | 76.96 | N/A | N/A |
 
-Native-only ablation; bounded ending and velocity correction branches are also absent. A corrected-model comparison without completed-note merging is pending. *853,807 active inference parameters; 204ms model lookahead, excluding packet rounding and device processing time. [Evaluation details](docs/evaluations/shared-integration-35k.md).
+Existing corrected model with bounded ending, velocity and onset corrections retained; no completed-note merging. *Active parameters and total model delay are being verified. This model is omitted from the delay plot until its delay is confirmed; it is not classified as offline. [Evaluation details](docs/evaluations/shared-integration-corrected-15k.md).
 
 #### Sori-Realtime4.8M_192ms_SS
 

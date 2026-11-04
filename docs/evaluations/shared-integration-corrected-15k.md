@@ -1,0 +1,27 @@
+# Sori Corrected 15k
+
+The existing A15k checkpoint retains the original bounded PA, offset, dynamics, pitch, rescue and refiner corrections. Its standalone output does not use completed-parent-note interval merging. This is a research comparison; selection across the remaining best-model candidates is ongoing.
+
+All 177 MAESTRO v3 test tracks were verified against the same reference-event arrays as the native-only comparison. Existing scalar results were reused; missing ordered pairs and velocity metrics were completed on CPU without neural inference.
+
+| Metric | F1 | Precision | Recall |
+|:-------|---:|----------:|-------:|
+| Note | 96.734854 | 98.532998 | 95.062281 |
+| Note + Velocity | 86.988323 | N/A | N/A |
+| Note + Offsets | 85.482125 | 87.055223 | 84.018594 |
+| Note + Offsets + Velocity | 76.957538 | N/A | N/A |
+
+Values are unweighted track-level means. Onset tolerance is 50ms, pitch tolerance 50 cents, and offset tolerance max(20% of reference duration, 50ms). Velocity uses per-track reference-range normalization, least-squares calibration and normalized error below 0.1. The reference contains 740,399 notes; predictions contain 707,940 notes, with onset TP 695,683, FP 12,257 and FN 44,716. Counts are not the macro averaging denominator. Exact protocol equivalence with other historical leaderboard rows is not established.
+
+## Model size and delay
+
+The registered graph contains 1,061,629 parameters. Its actual active parameter count and total declared delay are pending exact-source verification. Neither the native-only branch's 853,807 parameters nor its 204ms lookahead is substituted here. Finite lookahead is allowed by the real-time model design; absence of a confirmed delay value does not classify this model as offline. Device processing and queue latency are unmeasured.
+
+## Comparison and provenance
+
+- Corrected checkpoint SHA-256: `b14a34920c8fe35543ccabfb573441b9e06a19246171018786c8574f90108205`.
+- Original public source: `e849c844368fe73992fa652eba8db34e3da4f2c4`.
+- Original training source: `68f70ed4c2a5f0ae25c03ab8de2f90822b950318`.
+- Native-only 35k comparison checkpoint: `424826a13ea40117b625ba926f53720552096a789d4eaace4ef99fe52d35b842`.
+
+Native-only 35k scored 96.745756 / 77.314041 / 80.580937 / 65.210362 for note / velocity / offset / combined F1. Corrected A15k improves the latter three metrics by 9.674282 / 4.901188 / 11.747177 percentage points, while note F1 decreases by 0.010902 points and false positives increase by 6,699. These are different fixed checkpoints and training conditions, so this is not a causal ablation of correction modules alone.
