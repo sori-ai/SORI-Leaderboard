@@ -38,7 +38,7 @@ Quantitative evaluation results on standard datasets.
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
 | **Sori-Realtime4.8M_104ms** | 96.99 | 92.72 | 86.17 | 82.58 | 4.8M | 104ms |
 | Bytedance | 96.80 | N/A | 84.70 | 83.30 | 20.2M | Offline |
-| **Sori-Corrected-15k** | 96.73 | 86.99 | 85.48 | 76.96 | N/A* | N/A* |
+| **Sori-Corrected-15k** | 96.73 | 86.99 | 85.48 | 76.96 | 1.051M* | 344ms* |
 | **Sori-Realtime4.8M_192ms_SS** | 96.49 | 90.66 | 70.42 | 66.61 | 4.8M | 192ms |
 | Yamaha Mobile-AMT | 96.30 | N/A | 76.80 | 75.53 | 5.9M | 10s |
 | Google | 96.01 | N/A | 83.94 | 82.75 | 54M | Offline |
@@ -84,7 +84,7 @@ Quantitative evaluation results on standard datasets.
 | Note + Offsets | 85.48 | 87.06 | 84.02 |
 | Note + Offsets + Velocity | 76.96 | N/A | N/A |
 
-Existing corrected model with bounded ending, velocity and onset corrections retained; no completed-note merging. *Active parameters and total model delay are being verified. This model is omitted from the delay plot until its delay is confirmed; it is not classified as offline. [Evaluation details](docs/evaluations/shared-integration-corrected-15k.md).
+Existing corrected model with bounded ending, velocity and onset corrections retained; no completed-note merging. *1,051,293 active parameters; 344ms source-derived model lookahead, including bounded corrections. The plotted value is dependency support, not measured device or online publication latency. [Evaluation details](docs/evaluations/shared-integration-corrected-15k.md).
 
 #### Sori-Realtime4.8M_192ms_SS
 

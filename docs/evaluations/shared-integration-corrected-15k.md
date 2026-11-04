@@ -15,7 +15,11 @@ Values are unweighted track-level means. Onset tolerance is 50ms, pitch toleranc
 
 ## Model size and delay
 
-The registered graph contains 1,061,629 parameters. Its actual active parameter count and total declared delay are pending exact-source verification. Neither the native-only branch's 853,807 parameters nor its 204ms lookahead is substituted here. Finite lookahead is allowed by the real-time model design; absence of a confirmed delay value does not classify this model as offline. Device processing and queue latency are unmeasured.
+The original checkpoint has **1,051,293 active parameters**, verified with the existing operation-level trace and original-source binding; the registered graph contains 1,061,629 parameters.
+
+The plot uses **344ms source-derived model lookahead**: 204ms raw acoustic support (64ms FFT + 2 CNN frames + 3 pitchwise frames + 2 adapter frames, at 20ms/frame), plus max(7 rescue-age frames, 2 pitch-neighborhood + 2 neutral-neighborhood frames) × 20ms. Rescue arrival is max(age, 2), not age + 2.
+
+This is static dependency support, not measured device latency or a verified 344ms online publication schedule. The original evaluator collected whole-piece arrays and decoded on CPU; equivalence across arbitrary streaming chunks has not been established. Packet rounding, computation and queue time are separate. Finite lookahead is allowed by the model design; no future completed-parent-note interval join is used.
 
 ## Comparison and provenance
 
