@@ -88,6 +88,10 @@ comparison is not established. [Evaluation details](docs/recent-offline-evaluati
 
 <!-- BENCHMARK_TABLE_END -->
 
+The published 177-track Sori-Ensemble result above predates the long-note
+boundary postfilter. A separate [targeted postfilter evaluation](docs/long-boundary-evaluation.md)
+reports the available results and limitations; it is not a replacement 177-track score.
+
 ### Metric Definitions
 
 | Metric | Description |
