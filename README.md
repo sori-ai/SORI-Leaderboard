@@ -34,6 +34,7 @@ The real-time results below are historical.
 | Taegyun Kwon (2024) | 97.00 | N/A | 87.90 | 86.80 | 19.7M | 320ms |
 | **Sori-Realtime4.8M_104ms** | 96.99 | 92.72 | 86.17 | 82.58 | 4.8M | 104ms |
 | Bytedance | 96.80 | N/A | 84.70 | 83.30 | 20.2M | Offline |
+| **Sori-Corrected-15k** | 96.73 | 86.99 | 85.48 | 76.96 | 1.051M* | 344ms* |
 | **Sori-Realtime4.8M_192ms_SS** | 96.49 | 90.66 | 70.42 | 66.61 | 4.8M | 192ms |
 | Yamaha Mobile-AMT | 96.30 | N/A | 76.80 | 75.53 | 5.9M | 10s |
 | Google | 96.01 | N/A | 83.94 | 82.75 | 54M | Offline |
@@ -65,6 +66,17 @@ comparison is not established. [Evaluation details](docs/recent-offline-evaluati
 | Note + Velocity | 92.72 | 94.46 | 91.10 |
 | Note + Offsets | 86.17 | 87.77 | 84.68 |
 | Note + Offsets + Velocity | 82.58 | 84.10 | 81.15 |
+
+#### Sori-Corrected-15k
+
+| Metric | F1 | Precision | Recall |
+|:-------|:--:|:---------:|:------:|
+| Note (onset only) | 96.73 | 98.53 | 95.06 |
+| Note + Velocity | 86.99 | N/A | N/A |
+| Note + Offsets | 85.48 | 87.06 | 84.02 |
+| Note + Offsets + Velocity | 76.96 | N/A | N/A |
+
+Existing corrected model with bounded ending, velocity and onset corrections retained; no completed-note merging. *1,051,293 active parameters; 344ms source-derived model lookahead, including bounded corrections. The plotted value is dependency support, not measured device or online publication latency. [Evaluation details](docs/evaluations/shared-integration-corrected-15k.md).
 
 #### Sori-Realtime4.8M_192ms_SS
 
