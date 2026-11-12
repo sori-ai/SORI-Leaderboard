@@ -28,8 +28,29 @@ these results are not independent held-out evidence.
 In a separate 16-recording T2 test, 124 of 127 reference boundary reattacks
 were detected before and after the change. No additional matched high-velocity
 reference notes were lost. Full T2 reference construction is described in the
-[177-recording evaluation](recent-offline-evaluation.md). The full
-Sori-Ensemble benchmark with the new long-note postfilter has not been run.
+[177-recording evaluation](recent-offline-evaluation.md). The full 177-recording Sori-Ensemble benchmark with the new long-note
+postfilter has not been run.
+
+## Latest Current decoder: 16 complete T2 recordings
+
+The same 16 selected complete test recordings were retranscribed with both the
+short- and long-note boundary checks enabled and tuning correction OFF. Inputs
+were SHA-256 matched to the prior evaluation. New Current predictions were
+combined with the previously saved Stock predictions to keep the comparison
+controlled. The test-set T2 and velocity ≥32 scoring rules above still apply.
+
+| System | Macro onset F1 | FN | FP |
+|:-------|---------------:|---:|---:|
+| Previous Ensemble | 98.96768% | 1,399 | 632 |
+| Latest Current + saved Stock | 98.98997% | 1,400 | 609 |
+| Latest API UNION, including newly recomputed Stock | 98.98827% | 1,400 | 610 |
+
+The one additional FN crossed the 50 ms matching threshold after an onset
+shift of about 0.42 ms; it does not demonstrate a deleted performed note. The
+new Stock predictions differed from the saved Stock evaluation on two
+recordings, so the API UNION is reported separately. This selected 16-track
+result does not replace the existing 177-track score, and the test set was
+used during earlier development.
 
 The corresponding code change was merged in [sori PR #1422](https://github.com/sori-ai/sori/pull/1422).
 These experimental measurements do not establish that a particular API service

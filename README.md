@@ -92,6 +92,19 @@ The published 177-track Sori-Ensemble result above predates the long-note
 boundary postfilter. A separate [targeted postfilter evaluation](docs/long-boundary-evaluation.md)
 reports the available results and limitations; it is not a replacement 177-track score.
 
+### Real recordings and tuning correction
+
+A selected Catalog pilot evaluates model predictions by direct alignment to
+MusicXML. This is **score agreement, not independently verified transcription
+accuracy**. On 16 completed, score-version-matched segments, macro score
+coverage was 88.77% for TransKun without tuning correction and 93.34% for
+Sori-Ensemble without correction. With a **shared SORI-derived** correction,
+the values were 95.60% and 95.57%, respectively. Three of the original 20
+segments had a held alignment and one had a score-version mismatch; selection
+and alignment failure can bias the comparison. Full conditions, F1, proxy
+FP/FN, a natural-tuning example and limitations are in the
+[tuning evaluation](docs/tuning-alignment-evaluation.md).
+
 ### Metric Definitions
 
 | Metric | Description |
